@@ -1,106 +1,102 @@
-# Gabeo AI — AI-Powered RCM Denial Analysis Pipeline
+# Gabeo AI: Making Sense of Healthcare Claim Denials
 
-A high-precision, offline analysis pipeline for healthcare insurance claim denials. This system integrates deterministic billing rules with the reasoning capabilities of DeepSeek-R1 (8B) to automate root cause identification, recoverability assessment, and batch intelligence.
+I've built a high-precision pipeline to figure out why health insurance claims get rejected. It’s a hybrid system that uses old-school billing rules mixed with the reasoning power of **DeepSeek-R1:8B**. Basically, it automates the boring stuff—identifying root causes, seeing if we can get the money back, and spotting trends in big batches of data.
 
 ---
 
-## 1. Architecture Overview
+## 1. Architecture Overview(How it works)
 
-The system follows a **5-Layer Hybrid Architecture** designed for 100% offline operation:
+The system is split into a **5-Layer Hybrid Model**. Here’s the breakdown:
 
-1.  **Ingestion Layer**: Joins 835 Remittance Advice and 837 Claim Submission data into a unified `ClaimRecord`.
-2.  **Contextual Memory (TurboStore)**: A custom vector engine using **4-bit MSE Quantization** and `snowflake-arctic-embed-xs` (CPU-bound) to retrieve similar historical claim outcomes.
-3.  **Hybrid Rule Engine**: A factual pre-analyzer that performs deterministic date math (Timely Filing) and field-level validation (Missing Modifiers/Auth) before the LLM step.
-4.  **Reasoning Layer**: Utilizes **DeepSeek-R1 (8B)** via local Ollama to synthesize the claim data, historical context, and rule flags into a structured analysis.
-5.  **Batch Intelligence**: Groups denials using **KMeans Clustering** and generates systemic trend reports to identify high-value recovery opportunities.
+1.  **Ingestion**: It grabs **835 Remittance** and **837 Claim** files and squashes them into one `ClaimRecord`.
+2.  **TurboStore (The Memory)**: This is our custom search engine. I used **4-bit quantization** so it runs on your CPU, leaving the GPU free for the heavy lifting. It looks at past claims to find patterns.
+3.  **The Rule Engine**: Before the AI even looks at a claim, this layer checks the hard facts—like "did the user miss the filing deadline?" or "is there a missing modifier?" AI is great, but math is better left to code.
+4.  **The Brain (DeepSeek-R1)**: I ran **DeepSeek-R1:8B** locally via Ollama. It looks at the claim data and the "red flags" from the rule engine to explain *why* things went wrong.
+5.  **Batch Insights**: I used **KMeans Clustering** to group denials together. It helps us find the "big fish" (lucrative recovery chances) instead of chasing $10 errors one by one.
 
-### Folder Structure
+### The File Room
 ```text
 gabeo-rcm/
-├── data/               # SQLite DB, Vector Store, and Raw CSVs
-├── docs/               # System Design and Sample Outputs
-├── prompts/            # Raw text templates for P1 and P3
-├── scripts/            # Evaluation and Synthetic Data generation
+├── app/                # FastAPI Web Dashboard
+│   ├── core/           # App Configuration
+│   ├── routers/        # API Routes (Claims/Stats)
+│   ├── templates/      # HTML Interface
+│   └── static/         # CSS/Assets
+├── data/               # SQLite Database, Vector Storage, and Raw CSV Files
+├── docs/               # System Architecture and Sample Results
+├── prompts/            # Textual Templates for P1 and P3
+├── scripts/            # Evaluation and Synthetics Scripting
 ├── src/
-│   ├── ingestion/      # 835/837 Joining and CARC Lookup
+│   ├── ingestion/      # 835/837 Matching and CARC Lookups
 │   ├── analysis/       # Root Cause, Pattern Match, Clustering, Trends
 │   ├── storage/        # TurboStore (Quantization) and SQLite
-│   └── llm/            # Ollama client and Output Parser
-├── tests/              # Unit and Integration test suite
-├── main.py             # CLI Orchestrator
+│   └── llm/            # Ollama Client and Result Parsing
+├── tests/              # Comprehensive Test Suite
+├── main.py             # Command Line Interface
 └── requirements.txt
 ```
 
 ---
 
-## 2. Setup & Run Instructions
+## 2. Setup & Run Instructions(Getting Started)
 
-### Prerequisites
+### What you need
 - **Python 3.10+**
-- **Ollama** (Local LLM Server)
+- **Ollama** (for running the AI locally)
 
-### Installation
-1.  **Pull the Model**:
-    ```bash
-    ollama pull deepseek-r1:8b
-    ```
-2.  **Install Dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
+### Setup
+1.  **Grab the AI model**
+    `ollama pull deepseek-r1:8b`
+2.  **Install the boring stuff**
+    `pip install -r requirements.txt`
 
-### Running the Pipeline
-- **Analyze a single claim**:
-    ```bash
-    python main.py analyze --claim data/samples/claim_a.json
-    ```
-- **Batch process and cluster**:
-    ```bash
-    python main.py batch --input data/synthetic/claims.json --cluster
-    ```
-- **Generate Systemic Trends (P2.3)**:
-    ```bash
-    python main.py trends --min-claims 3
-    ```
-- **Run Evaluation**:
-    ```bash
-    python main.py evaluate
-    ```
+### Running the Pipe
+-   **Analyze a single claim**: `python main.py analyze --claim data/samples/claim_a.json`
+-   **Run a whole batch**: `python main.py batch --input data/synthetic/claims.json --cluster`
+-   **Spot trends**: `python main.py trends --min-claims 3`
+-   **Open the Dashboard**: `python main.py ui --port 8000` (Then just head to `localhost:8000` in your browser. It’s got a nice amber/white theme.)
 
 ---
 
 ## 3. Design Decisions & Trade-offs
 
-*   **DeepSeek-R1 over Llama-3**: We chose R1 for its internal chain-of-thought (reasoning) capabilities. In RCM, "why" a claim is denied is often hidden in complex logic; R1's reasoning traces these paths better than standard instruction models.
-*   **Rule Engine Before LLM**: To prevent hallucinations in mathematical domains (like calculating a 180-day filing limit), we use a deterministic Python layer. The LLM is "instructed" by these facts, ensuring 100% accuracy on date math.
-*   **4-bit Quantized TurboStore**: To preserve the 8GB VRAM of a standard RTX 4060 for the LLM, the vector store uses scalar quantization and runs embeddings on the CPU. This allows for searching thousands of historical claims with near-zero GPU impact.
-*   **SQLite over Postgres**: For a local "ML Assignment" context, SQLite provides zero-configuration persistence and full SQL capability for trend reporting without requiring a background service.
+### DeepSeek-R1 Locally Hosted over Other Models
+I chose R1 for its internal chain-of-thought (reasoning) capabilities while being lightweight and opensource reducing the costs and privacy concerns. In RCM, "why" a claim is denied is often hidden in complex logic; R1's reasoning traces these paths better than standard instruction models. Furthermore, it is very efficient for this task as we only need the reasoning capability not the creative capabilities or any other capabilities.
+
+### Rule Engine Before LLM
+To prevent hallucinations in mathematical domains (like calculating a 180-day filing limit), I used a deterministic Python layer. The LLM is "instructed" by these facts, ensuring 100% accuracy on date math.
+
+### Custom VectorStore over ChromaDB or FAISS
+To preserve the 8GB VRAM of our local system for the LLM, the vector store uses scalar 4-bit quantization and runs embeddings on the CPU. This allows for searching thousands of historical claims with near-zero GPU impact.
+
+### SQLite over Postgres
+For a local "ML Assignment" context, SQLite provides zero-configuration persistence and full QL capability for trend reporting without requiring a background service.
 
 ---
 
 ## 4. Evaluation Results (Synthetic v1.0)
 
-| Metric | Result |
-| :--- | :--- |
-| **Deterministic Rule Accuracy** | 100.0% |
-| **Recoverability Accuracy (v1.0)** | 92.4% |
-| **Avg. Inference Confidence** | 0.88 |
-| **Parsing Success Rate** | 100.0% |
+|         **Metric**        |       **Result**       |
+|           :---            |          :---          |
+|      **Rule Accuracy**    |         100.0%         |
+|**Recovery Logic Accuracy**|          92.4%         |
+|  **AI Confidence (Avg)**  |          0.88          |
+| **Success Rate (Parsing)**|         100.0%         |
 
-*Note: Accuracy measured against a ground-truth set of 35 synthetic claims covering Tier 1 CARCs.*
+*I tested this on 35 "ground-truth" claims to make sure the logic holds up.*
 
 ---
 
 ## 5. Known Limitations
 
-1.  **COB Complexity**: Current logic does not fully support Coordination of Benefits (Secondary/Tertiary claims) beyond basic timely filing logic.
-2.  **Payer Drift**: Filing windows (e.g., 180 days for Commercial) are currently hardcoded constants and may require a dynamic knowledge base for production use.
-3.  **Model Latency**: As a reasoning model, DeepSeek-R1:8B can take 15–30s per claim depending on hardware.
+1.  **Complex COB**: At present, the system does not completely support COB claims (Secondary/Tertiary) outside of simple timely filing logic.
+2.  **Changing Deadlines**: Current filing times are fixed as constants (e.g., 180 days for Commercial), and may require a dynamic knowledge base in production.
+3.  **Latency**: Since the AI runs locally, expect to wait about 15-30 seconds for it to finish a claim. 
 
 ---
 
-## 6. Future Work
+## 6. Future Scope(What's Next?)
 
-*   **Problem 4 (Appeals)**: Implement an automated appeal letter generator using the `recommended_action` and `evidence` fields.
-*   **Payer Policy RAG**: Build a dedicated vector store for Payer Policy Manuals (PDFs) to replace hardcoded filing limits.
-*   **FHIR Support**: Implement ingestion for HL7 FHIR R4 resources to support modern hospital data standards.
+*   **Problem 4 (Appeal Letter Generator)**: Generate an automated appeal letter based on `recommended_action` and `evidence`.
+*   **Payer Policy RAG**: Implement a dedicated vector store for PDFs containing Payer Policy Manuals.
+*   **HL7 FHIR R4 Support**: Develop ingest capability for HL7 FHIR R4 resources.

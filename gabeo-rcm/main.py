@@ -37,6 +37,10 @@ def main():
     # Evaluate
     evaluate_parser = subparsers.add_parser("evaluate", help="Run pipeline evaluation against synthetic data")
 
+    # UI
+    ui_parser = subparsers.add_parser("ui", help="Launch the RCM Analysis Dashboard (Web UI)")
+    ui_parser.add_argument("--port", type=int, default=8000, help="Port to run the dashboard on")
+
     args = parser.parse_args()
 
     if not args.command:
@@ -92,6 +96,12 @@ def main():
         metrics = evaluator.run_evaluation()
         print("\n=== Pipeline Performance Metrics ===")
         print(json.dumps(metrics, indent=2))
+
+    elif args.command == "ui":
+        import uvicorn
+        logger.info(f"Launching Dashboard on http://localhost:{args.port}")
+        # Updated to point to the new app directory structure
+        uvicorn.run("app.main:app", host="0.0.0.0", port=args.port, reload=True)
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gabeo RCM</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-icon">G</span>
+                <span class="logo-text">Gabeo <span class="highlight">RCM</span></span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" onclick="showSection('overview')">Overview</button>
+                <button class="nav-item" onclick="showSection('claims')">Claims Analysis</button>
+                <button class="nav-item" onclick="showSection('trends')">Systemic Trends</button>
+                <button class="nav-item" onclick="showSection('clusters')">Recovery Clusters</button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-badge">
+                    <span class="pulse"></span> API active
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>RCM Denial Pipeline</h1>
+                <div class="user-profile">
+                    <span class="profile-name">Billing Admin</span>
+                    <div class="avatar">BA</div>
+                </div>
+            </header>
+
+            <!-- Sections -->
+            <div id="overview" class="section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <label>Total Denials</label>
+                        <div class="value" id="stat-total-count">0</div>
+                        <div class="subtext" id="stat-total-value">$0</div>
+                    </div>
+                    <div class="stat-card amber">
+                        <label>Recoverable Value</label>
+                        <div class="value" id="stat-rec-value">$0</div>
+                        <div class="subtext" id="stat-rec-count">0 claims identified</div>
+                    </div>
+                    <div class="stat-card">
+                        <label>Recovery Rate</label>
+                        <div class="value" id="stat-rec-rate">0%</div>
+                        <div class="subtext">Based on systemic rules</div>
+                    </div>
+                    <div class="stat-card">
+                        <label>Model Confidence</label>
+                        <div class="value" id="stat-confidence">0.0</div>
+                        <div class="subtext">DeepSeek-R1 Calibrated</div>
+                    </div>
+                </div>
+
+                <div class="dashboard-main">
+                    <div class="recent-claims card">
+                        <h3>Recent Analyses</h3>
+                        <table id="claims-table-summary">
+                            <thead>
+                                <tr>
+                                    <th>Claim ID</th>
+                                    <th>Payer</th>
+                                    <th>CARC</th>
+                                    <th>Status</th>
+                                    <th>Confidence</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="claims" class="section">
+                <div class="card">
+                    <h3>Detailed Claims Analysis</h3>
+                    <div class="scroll-table">
+                        <table id="claims-table-full">
+                            <thead>
+                                <tr>
+                                    <th>Claim ID</th>
+                                    <th>Payer</th>
+                                    <th>Procedure</th>
+                                    <th>CARC</th>
+                                    <th>Verdict</th>
+                                    <th>Confidence</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trends" class="section">
+                <div class="card">
+                    <h3>Systemic Denial Trends (P2.3)</h3>
+                    <p class="section-desc">Statistically significant patterns identified across payer-procedure
+                        combinations.</p>
+                    <div class="trends-grid" id="trends-container"></div>
+                </div>
+            </div>
+
+            <div id="clusters" class="section">
+                <div class="card">
+                    <h3>Intelligent Clusters (P3)</h3>
+                    <p class="section-desc">KMeans grouped recovery opportunities with bulk action logic.</p>
+                    <div id="clusters-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function fetchData() {
+            try {
+                const stats = await fetch('/api/stats').then(res => res.json());
+                const claims = await fetch('/api/claims').then(res => res.json());
+                const trends = await fetch('/api/trends').then(res => res.json());
+                const clusters = await fetch('/api/clusters').then(res => res.json());
+
+                // Update Stats
+                document.getElementById('stat-total-count').textContent = stats.total_claims || 0;
+                document.getElementById('stat-total-value').textContent = '$' + (stats.total_value || 0).toLocaleString();
+                document.getElementById('stat-rec-value').textContent = '$' + (stats.recoverable_value || 0).toLocaleString();
+                document.getElementById('stat-rec-count').textContent = (stats.recoverable_count || 0) + ' claims identified';
+                document.getElementById('stat-rec-rate').textContent = (stats.recovery_rate || 0) + '%';
+                document.getElementById('stat-confidence').textContent = stats.avg_confidence || 0.0;
+
+                // Update Summary Table
+                const summaryTable = document.querySelector('#claims-table-summary tbody');
+                if (claims && claims.length > 0) {
+                    summaryTable.innerHTML = claims.slice(0, 5).map(c => `
+                        <tr>
+                            <td>${c.claim.claim_id}</td>
+                            <td>${c.claim.payer_name}</td>
+                            <td>${c.claim.carc_code}</td>
+                            <td><span class="status-pill ${c.analysis.recoverability}">${c.analysis.recoverability}</span></td>
+                            <td>${c.analysis.confidence}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    summaryTable.innerHTML = '<tr><td colspan="5" style="text-align:center">No claims found in database</td></tr>';
+                }
+
+                // Update Full Table
+                const fullTable = document.querySelector('#claims-table-full tbody');
+                if (claims && claims.length > 0) {
+                    fullTable.innerHTML = claims.map(c => `
+                        <tr>
+                            <td>${c.claim.claim_id}</td>
+                            <td>${c.claim.payer_name}</td>
+                            <td>${c.claim.procedure_code}</td>
+                            <td>${c.claim.carc_code}</td>
+                            <td><span class="status-pill ${c.analysis.recoverability}">${c.analysis.recoverability}</span></td>
+                            <td>${c.analysis.confidence}</td>
+                            <td class="action-cell">${c.analysis.recommended_action}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    fullTable.innerHTML = '<tr><td colspan="7" style="text-align:center">No claims found in database</td></tr>';
+                }
+
+                // Update Trends
+                const trendsContainer = document.getElementById('trends-container');
+                if (trends && trends.length > 0) {
+                    trendsContainer.innerHTML = trends.map(t => `
+                        <div class="trend-card">
+                            <div class="trend-header">
+                                <span class="payer">${t.payer}</span>
+                                <span class="proc">${t.procedure_code}</span>
+                            </div>
+                            <div class="trend-body">
+                                <div class="trend-stat">
+                                    <label>Pattern Freq</label>
+                                    <div class="val">${t.systemic_frequency_score}%</div>
+                                </div>
+                                <div class="trend-stat">
+                                    <label>Recovery Rate</label>
+                                    <div class="val">${t.historical_recovery_rate}%</div>
+                                </div>
+                            </div>
+                            <div class="trend-footer">
+                                CARC ${t.carc_code} - Avg Denied: $${t.avg_denied_amount}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    trendsContainer.innerHTML = '<p>No systemic patterns detected yet.</p>';
+                }
+
+                // Update Clusters
+                const clustersContainer = document.getElementById('clusters-container');
+                if (clusters && clusters.length > 0) {
+                    clustersContainer.innerHTML = clusters.map(c => `
+                        <div class="cluster-card">
+                            <div class="cluster-header">
+                                <h4>${c.summary_json.cluster_label}</h4>
+                                <span class="impact">$${c.total_value.toLocaleString()} | ${c.num_claims} claims</span>
+                            </div>
+                            <div class="cluster-content">
+                                <p><strong>Opportunity:</strong> ${c.summary_json.recovery_opportunity}</p>
+                                <p><strong>Bulk Action:</strong> ${c.summary_json.recommended_bulk_action}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    clustersContainer.innerHTML = '<p>No clusters identified yet.</p>';
+                }
+            } catch (error) {
+                console.error("Error fetching dashboard data:", error);
+            }
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        window.onload = fetchData;
+    </script>
+</body>
+
+</html>

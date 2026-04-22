@@ -7,7 +7,9 @@ from src.models import ClaimRecord, DenialAnalysis
 class ClaimStore:
     def __init__(self, db_path: str = None):
         if db_path is None:
-            db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data", "claims.db")
+            # Ensure we use an absolute path relative to the project root
+            base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+            db_path = os.path.join(base_dir, "data", "claims.db")
         self.db_path = db_path
         self._init_db()
 
