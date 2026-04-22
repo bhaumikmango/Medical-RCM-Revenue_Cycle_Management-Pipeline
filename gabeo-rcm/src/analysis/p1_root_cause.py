@@ -26,7 +26,17 @@ class RootCauseAnalyzer:
         """
         Runs deterministic logic to pre-fill factual conclusions before the LLM step.
         """
-        flags = {"confidence": None, "recoverability": None, "evidence": []}
+        flags = {
+            "confidence": None, 
+            "recoverability": None, 
+            "evidence": [],
+            "days_to_file": None,
+            "filing_limit_days": None,
+            "filed_late": False,
+            "delay_reason_code_present": bool(claim.delay_reason_code),
+            "prior_auth_present": bool(claim.prior_authorization),
+            "claim_frequency": claim.claim_frequency
+        }
         carc = claim.carc_code
         
         # CARC 29: Timely Filing
@@ -35,13 +45,15 @@ class RootCauseAnalyzer:
             service = self._parse_date(claim.service_date_from)
             if received and service:
                 days = (received - service).days
-                flags["evidence"].append(f"Filing gap: {days} days")
+                flags["days_to_file"] = days
                 flags["confidence"] = 1.0
                 
                 is_medicare = "medicare" in claim.insurance_type.lower()
                 limit = 365 if is_medicare else 180
+                flags["filing_limit_days"] = limit
                 
                 if days > limit:
+                    flags["filed_late"] = True
                     flags["recoverability"] = "not_recoverable"
                     flags["evidence"].append(f"Exceeded {limit} day limit for {claim.insurance_type}")
                 else:
@@ -53,11 +65,15 @@ class RootCauseAnalyzer:
                 
         # CARC 18: Duplicate
         elif carc == "18":
-            # No original reference fields provided in our simplified ClaimRecord, 
-            # so we always default to needs_review as per decision Q1
-            flags["recoverability"] = "needs_review"
-            flags["confidence"] = 0.7
-            flags["evidence"].append("No original claim reference found. Needs manual verification of duplicate status.")
+            # If claim_frequency is 7 (Replacement) or 8 (Void), it's a correction, not a duplicate
+            if claim.claim_frequency in ("7", "8"):
+                flags["recoverability"] = "recoverable"
+                flags["confidence"] = 1.0
+                flags["evidence"].append(f"Claim frequency is {claim.claim_frequency} (Correction/Void). Not a duplicate.")
+            else:
+                flags["recoverability"] = "needs_review"
+                flags["confidence"] = 0.7
+                flags["evidence"].append("Original claim frequency. Needs manual verification of duplicate status.")
             
         # CARC 16: Missing Info
         elif carc == "16":
@@ -127,7 +143,7 @@ class RootCauseAnalyzer:
             carc_code=claim.carc_code,
             carc_description=carc_info["description"],
             adjustment_group=claim.adjustment_group,
-            rule_engine_flags=json.dumps(rule_flags, indent=2),
+            rule_engine_flags_json=json.dumps(rule_flags, indent=2),
             similar_claims_context=similar_ctx or "None provided."
         )
 

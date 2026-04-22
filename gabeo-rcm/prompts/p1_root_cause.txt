@@ -5,30 +5,49 @@ You are a healthcare revenue cycle expert analyzing a denied insurance claim.
 
 ## CARC Code Reference
 Code {carc_code}: {carc_description}
-Group: {adjustment_group}
+Adjustment Group: {adjustment_group}
 
-## Rule Engine Pre-Analysis
-{rule_engine_flags}
+## Rule Engine Pre-Analysis (trust these, do not recalculate)
+{rule_engine_flags_json}
 
-## Similar Historical Claims
+## Similar Historical Claims (top 3 by vector similarity)
+Format: [ClaimID | Payer | CARC | Outcome | Amount]
 {similar_claims_context}
+Use these only to assess recoverability likelihood. Do not copy their field values into this claim's analysis.
 
 ## Task
-Analyze this denial. Respond ONLY with valid JSON matching this schema:
+Respond ONLY with valid JSON matching this exact schema:
 {{
-  "root_cause": "...",
-  "carc_interpretation": "...",
+  "root_cause": "One sentence — the specific reason this claim was denied",
+  "carc_interpretation": "What this CARC code means in the context of this specific claim",
   "recoverability": "recoverable|not_recoverable|needs_review",
   "confidence": 0.0-1.0,
-  "evidence": ["field: value — significance", ...],
-  "recommended_action": "..."
+  "evidence": [
+    "field_name=value — why this field matters to the denial",
+    "example: ec_DelayReasonCode='' — no delay justification present"
+  ],
+  "recommended_action": "Specific next step for the billing team"
 }}
 
-Rules:
-- Trust rule_engine_flags for date math and field checks. Do not recalculate them.
-- CARC 29: timely filing verdict is already computed. Focus on appeal strategy only.
-- CARC 16: list all missing fields from rule_engine_flags in evidence.
-- CARC 252: recoverability is always "recoverable", confidence is always 0.9. Only provide recommended_action.
-- CARC 253 (sequestration): always not_recoverable, confidence 1.0.
-- Do not invent fields not in the data.
-- Do not emit <think> tags or chain-of-thought. Respond ONLY with the JSON object.
+## Rules
+CARC 29 (Timely Filing):
+- Filed late verdict is in rule_engine_flags. Do not recalculate.
+- Medicare: 365-day window. Secondary claims: window starts from primary EOB date.
+- Commercial: 90–180 days. If delay_reason_code present -> needs_review.
+- Medicaid: ~365 days, state-specific -> needs_review if borderline.
+
+CARC 16 (Missing Info): List every missing field from rule_engine_flags in evidence.
+CARC 18 (Duplicate): If claim_frequency=7 or 8 -> recoverable. If 1 -> needs_review.
+CARC 50 (Medical Necessity): If diagnosis supports procedure -> needs_review. No prior auth -> lower confidence.
+CARC 197 (Prior Auth Absent): Low recoverability (0.2) unless retro-auth possible -> needs_review.
+CARC 252 (Attachment Missing): Always recoverable, confidence 0.9.
+CARC 253 (Sequestration): Always not_recoverable, confidence 1.0.
+
+Confidence calibration:
+- 1.0: deterministic rule (duplicate confirmed, sequestration)
+- 0.8–0.9: strong claim evidence
+- 0.6–0.7: circumstantial or payer behavior dependent
+- 0.4–0.5: insufficient data -> use needs_review
+- Never exceed 0.8 if similar_claims_context is empty.
+
+Respond ONLY with the JSON object.

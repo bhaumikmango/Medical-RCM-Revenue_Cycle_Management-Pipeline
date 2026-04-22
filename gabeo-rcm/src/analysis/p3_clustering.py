@@ -32,6 +32,16 @@ class ClusterInsight:
         return d
 
 class DenialClusterer:
+    CPT_LOOKUP = {
+        "99213": "Office Visit - Level 3",
+        "99214": "Office Visit - Level 4",
+        "27447": "Total Knee Arthroplasty",
+        "72148": "MRI Lumbar Spine",
+        "99203": "New Patient Visit - Level 3",
+        "99283": "ER Visit - Level 3",
+        "G0439": "Annual Wellness Visit"
+    }
+
     def __init__(self, n_clusters: int = 5):
         self.n_clusters = n_clusters
         
@@ -109,12 +119,21 @@ class DenialClusterer:
             
             procs = [item['claim'].get('procedure_code', '') for item in items]
             dominant_procedure = max(set(procs), key=procs.count) if procs else "Unknown"
+            procedure_desc = self.CPT_LOOKUP.get(dominant_procedure, "Unknown Procedure")
             
             rec_scores = [{"recoverable": 1.0, "needs_review": 0.5, "not_recoverable": 0.0}.get(item['analysis'].get('recoverability'), 0.0) for item in items]
             recovery_rate_pct = int((sum(rec_scores) / len(rec_scores)) * 100) if rec_scores else 0
             
             claim_ids = [item['claim'].get('claim_id') for item in items]
             
+            # Sample 3 representative claims
+            import random
+            sample_size = min(3, len(items))
+            samples = random.sample(items, sample_size)
+            rep_claims_str = ""
+            for s in samples:
+                rep_claims_str += f"- {s['claim']['claim_id']}: {s['claim']['payer_name']}, CPT {s['claim']['procedure_code']}, CARC {s['claim']['carc_code']}, Verdict: {s['analysis']['recoverability']}\n"
+
             insight = ClusterInsight(
                 cluster_id=cluster_id,
                 num_claims=num_claims,
@@ -133,7 +152,9 @@ class DenialClusterer:
                 dominant_payer=dominant_payer,
                 dominant_carc=dominant_carc,
                 dominant_procedure=dominant_procedure,
-                recovery_rate_pct=recovery_rate_pct
+                procedure_desc=procedure_desc,
+                recovery_rate_pct=recovery_rate_pct,
+                representative_claims=rep_claims_str or "None available."
             )
             
             raw_output = llm_client.generate_sync(prompt)
