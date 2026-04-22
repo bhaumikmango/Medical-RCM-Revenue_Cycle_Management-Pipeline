@@ -1,0 +1,317 @@
+[
+  {
+    "claim_id": "SYN-2026-0001",
+    "carc_code": "4",
+    "insurance_type": "Medicare",
+    "procedure_code": "99214",
+    "payer_name": "Medicare Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Modifier mismatch"
+  },
+  {
+    "claim_id": "SYN-2026-0002",
+    "carc_code": "18",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Duplicate no ref"
+  },
+  {
+    "claim_id": "SYN-2026-0003",
+    "carc_code": "4",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 3",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Modifier mismatch"
+  },
+  {
+    "claim_id": "SYN-2026-0004",
+    "carc_code": "50",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Medical necessity auth"
+  },
+  {
+    "claim_id": "SYN-2026-0005",
+    "carc_code": "50",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Medical necessity auth"
+  },
+  {
+    "claim_id": "SYN-2026-0006",
+    "carc_code": "18",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Duplicate no ref"
+  },
+  {
+    "claim_id": "SYN-2026-0007",
+    "carc_code": "18",
+    "insurance_type": "Medicare",
+    "procedure_code": "72148",
+    "payer_name": "Medicare Payer 1",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Duplicate with ref"
+  },
+  {
+    "claim_id": "SYN-2026-0008",
+    "carc_code": "252",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "recoverable",
+    "root_cause": "Mock root cause for Attachment needed"
+  },
+  {
+    "claim_id": "SYN-2026-0009",
+    "carc_code": "18",
+    "insurance_type": "Commercial",
+    "procedure_code": "27447",
+    "payer_name": "Commercial Payer 4",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Duplicate no ref"
+  },
+  {
+    "claim_id": "SYN-2026-0010",
+    "carc_code": "97",
+    "insurance_type": "Commercial",
+    "procedure_code": "27447",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Bundled"
+  },
+  {
+    "claim_id": "SYN-2026-0011",
+    "carc_code": "97",
+    "insurance_type": "Medicaid",
+    "procedure_code": "99213",
+    "payer_name": "Medicaid Payer 2",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Bundled"
+  },
+  {
+    "claim_id": "SYN-2026-0012",
+    "carc_code": "96",
+    "insurance_type": "Commercial",
+    "procedure_code": "99213",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Non-covered with remark"
+  },
+  {
+    "claim_id": "SYN-2026-0013",
+    "carc_code": "96",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Non-covered with remark"
+  },
+  {
+    "claim_id": "SYN-2026-0014",
+    "carc_code": "252",
+    "insurance_type": "Medicare",
+    "procedure_code": "72148",
+    "payer_name": "Medicare Payer 2",
+    "recoverability": "recoverable",
+    "root_cause": "Mock root cause for Attachment needed"
+  },
+  {
+    "claim_id": "SYN-2026-0015",
+    "carc_code": "29",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Timely filing - bad"
+  },
+  {
+    "claim_id": "SYN-2026-0016",
+    "carc_code": "97",
+    "insurance_type": "Commercial",
+    "procedure_code": "27447",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Bundled"
+  },
+  {
+    "claim_id": "SYN-2026-0017",
+    "carc_code": "18",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 3",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Duplicate no ref"
+  },
+  {
+    "claim_id": "SYN-2026-0018",
+    "carc_code": "16",
+    "insurance_type": "Commercial",
+    "procedure_code": "99213",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Missing info"
+  },
+  {
+    "claim_id": "SYN-2026-0019",
+    "carc_code": "4",
+    "insurance_type": "Medicare",
+    "procedure_code": "72148",
+    "payer_name": "Medicare Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Modifier mismatch"
+  },
+  {
+    "claim_id": "SYN-2026-0020",
+    "carc_code": "197",
+    "insurance_type": "Commercial",
+    "procedure_code": "27447",
+    "payer_name": "Commercial Payer 4",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for No prior auth"
+  },
+  {
+    "claim_id": "SYN-2026-0021",
+    "carc_code": "50",
+    "insurance_type": "Commercial",
+    "procedure_code": "99213",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Medical necessity auth"
+  },
+  {
+    "claim_id": "SYN-2026-0022",
+    "carc_code": "16",
+    "insurance_type": "Medicare",
+    "procedure_code": "27447",
+    "payer_name": "Medicare Payer 2",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Missing info"
+  },
+  {
+    "claim_id": "SYN-2026-0023",
+    "carc_code": "16",
+    "insurance_type": "Commercial",
+    "procedure_code": "99213",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Missing info"
+  },
+  {
+    "claim_id": "SYN-2026-0024",
+    "carc_code": "50",
+    "insurance_type": "Commercial",
+    "procedure_code": "27447",
+    "payer_name": "Commercial Payer 3",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Medical necessity auth"
+  },
+  {
+    "claim_id": "SYN-2026-0025",
+    "carc_code": "97",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 3",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Bundled"
+  },
+  {
+    "claim_id": "SYN-2026-0026",
+    "carc_code": "29",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 1",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Timely filing - bad"
+  },
+  {
+    "claim_id": "SYN-2026-0027",
+    "carc_code": "18",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Duplicate no ref"
+  },
+  {
+    "claim_id": "SYN-2026-0028",
+    "carc_code": "97",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 2",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Bundled"
+  },
+  {
+    "claim_id": "SYN-2026-0029",
+    "carc_code": "96",
+    "insurance_type": "Medicare",
+    "procedure_code": "99213",
+    "payer_name": "Medicare Payer 4",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Non-covered with remark"
+  },
+  {
+    "claim_id": "SYN-2026-0030",
+    "carc_code": "29",
+    "insurance_type": "Commercial",
+    "procedure_code": "99214",
+    "payer_name": "Commercial Payer 4",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Timely filing - bad"
+  },
+  {
+    "claim_id": "SYN-2026-0031",
+    "carc_code": "29",
+    "insurance_type": "Medicare",
+    "procedure_code": "99214",
+    "payer_name": "Medicare Payer 3",
+    "recoverability": "recoverable",
+    "root_cause": "Mock root cause for Timely filing - good"
+  },
+  {
+    "claim_id": "SYN-2026-0032",
+    "carc_code": "197",
+    "insurance_type": "Commercial",
+    "procedure_code": "72148",
+    "payer_name": "Commercial Payer 5",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for No prior auth"
+  },
+  {
+    "claim_id": "SYN-2026-0033",
+    "carc_code": "4",
+    "insurance_type": "Medicaid",
+    "procedure_code": "72148",
+    "payer_name": "Medicaid Payer 1",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Modifier mismatch"
+  },
+  {
+    "claim_id": "SYN-2026-0034",
+    "carc_code": "18",
+    "insurance_type": "Medicaid",
+    "procedure_code": "27447",
+    "payer_name": "Medicaid Payer 5",
+    "recoverability": "not_recoverable",
+    "root_cause": "Mock root cause for Duplicate with ref"
+  },
+  {
+    "claim_id": "SYN-2026-0035",
+    "carc_code": "97",
+    "insurance_type": "Medicaid",
+    "procedure_code": "99214",
+    "payer_name": "Medicaid Payer 4",
+    "recoverability": "needs_review",
+    "root_cause": "Mock root cause for Bundled"
+  }
+]

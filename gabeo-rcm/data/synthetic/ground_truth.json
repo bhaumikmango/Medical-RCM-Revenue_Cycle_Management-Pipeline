@@ -1,0 +1,212 @@
+{
+  "SYN-2026-0001": {
+    "claim_id": "SYN-2026-0001",
+    "recoverability": "needs_review",
+    "carc": "4",
+    "description": "Modifier mismatch"
+  },
+  "SYN-2026-0002": {
+    "claim_id": "SYN-2026-0002",
+    "recoverability": "needs_review",
+    "carc": "18",
+    "description": "Duplicate no ref"
+  },
+  "SYN-2026-0003": {
+    "claim_id": "SYN-2026-0003",
+    "recoverability": "needs_review",
+    "carc": "4",
+    "description": "Modifier mismatch"
+  },
+  "SYN-2026-0004": {
+    "claim_id": "SYN-2026-0004",
+    "recoverability": "needs_review",
+    "carc": "50",
+    "description": "Medical necessity auth"
+  },
+  "SYN-2026-0005": {
+    "claim_id": "SYN-2026-0005",
+    "recoverability": "needs_review",
+    "carc": "50",
+    "description": "Medical necessity auth"
+  },
+  "SYN-2026-0006": {
+    "claim_id": "SYN-2026-0006",
+    "recoverability": "needs_review",
+    "carc": "18",
+    "description": "Duplicate no ref"
+  },
+  "SYN-2026-0007": {
+    "claim_id": "SYN-2026-0007",
+    "recoverability": "not_recoverable",
+    "carc": "18",
+    "description": "Duplicate with ref"
+  },
+  "SYN-2026-0008": {
+    "claim_id": "SYN-2026-0008",
+    "recoverability": "recoverable",
+    "carc": "252",
+    "description": "Attachment needed"
+  },
+  "SYN-2026-0009": {
+    "claim_id": "SYN-2026-0009",
+    "recoverability": "needs_review",
+    "carc": "18",
+    "description": "Duplicate no ref"
+  },
+  "SYN-2026-0010": {
+    "claim_id": "SYN-2026-0010",
+    "recoverability": "needs_review",
+    "carc": "97",
+    "description": "Bundled"
+  },
+  "SYN-2026-0011": {
+    "claim_id": "SYN-2026-0011",
+    "recoverability": "needs_review",
+    "carc": "97",
+    "description": "Bundled"
+  },
+  "SYN-2026-0012": {
+    "claim_id": "SYN-2026-0012",
+    "recoverability": "not_recoverable",
+    "carc": "96",
+    "description": "Non-covered with remark"
+  },
+  "SYN-2026-0013": {
+    "claim_id": "SYN-2026-0013",
+    "recoverability": "not_recoverable",
+    "carc": "96",
+    "description": "Non-covered with remark"
+  },
+  "SYN-2026-0014": {
+    "claim_id": "SYN-2026-0014",
+    "recoverability": "recoverable",
+    "carc": "252",
+    "description": "Attachment needed"
+  },
+  "SYN-2026-0015": {
+    "claim_id": "SYN-2026-0015",
+    "recoverability": "not_recoverable",
+    "carc": "29",
+    "description": "Timely filing - bad"
+  },
+  "SYN-2026-0016": {
+    "claim_id": "SYN-2026-0016",
+    "recoverability": "needs_review",
+    "carc": "97",
+    "description": "Bundled"
+  },
+  "SYN-2026-0017": {
+    "claim_id": "SYN-2026-0017",
+    "recoverability": "needs_review",
+    "carc": "18",
+    "description": "Duplicate no ref"
+  },
+  "SYN-2026-0018": {
+    "claim_id": "SYN-2026-0018",
+    "recoverability": "needs_review",
+    "carc": "16",
+    "description": "Missing info"
+  },
+  "SYN-2026-0019": {
+    "claim_id": "SYN-2026-0019",
+    "recoverability": "needs_review",
+    "carc": "4",
+    "description": "Modifier mismatch"
+  },
+  "SYN-2026-0020": {
+    "claim_id": "SYN-2026-0020",
+    "recoverability": "not_recoverable",
+    "carc": "197",
+    "description": "No prior auth"
+  },
+  "SYN-2026-0021": {
+    "claim_id": "SYN-2026-0021",
+    "recoverability": "needs_review",
+    "carc": "50",
+    "description": "Medical necessity auth"
+  },
+  "SYN-2026-0022": {
+    "claim_id": "SYN-2026-0022",
+    "recoverability": "needs_review",
+    "carc": "16",
+    "description": "Missing info"
+  },
+  "SYN-2026-0023": {
+    "claim_id": "SYN-2026-0023",
+    "recoverability": "needs_review",
+    "carc": "16",
+    "description": "Missing info"
+  },
+  "SYN-2026-0024": {
+    "claim_id": "SYN-2026-0024",
+    "recoverability": "needs_review",
+    "carc": "50",
+    "description": "Medical necessity auth"
+  },
+  "SYN-2026-0025": {
+    "claim_id": "SYN-2026-0025",
+    "recoverability": "needs_review",
+    "carc": "97",
+    "description": "Bundled"
+  },
+  "SYN-2026-0026": {
+    "claim_id": "SYN-2026-0026",
+    "recoverability": "not_recoverable",
+    "carc": "29",
+    "description": "Timely filing - bad"
+  },
+  "SYN-2026-0027": {
+    "claim_id": "SYN-2026-0027",
+    "recoverability": "needs_review",
+    "carc": "18",
+    "description": "Duplicate no ref"
+  },
+  "SYN-2026-0028": {
+    "claim_id": "SYN-2026-0028",
+    "recoverability": "needs_review",
+    "carc": "97",
+    "description": "Bundled"
+  },
+  "SYN-2026-0029": {
+    "claim_id": "SYN-2026-0029",
+    "recoverability": "not_recoverable",
+    "carc": "96",
+    "description": "Non-covered with remark"
+  },
+  "SYN-2026-0030": {
+    "claim_id": "SYN-2026-0030",
+    "recoverability": "not_recoverable",
+    "carc": "29",
+    "description": "Timely filing - bad"
+  },
+  "SYN-2026-0031": {
+    "claim_id": "SYN-2026-0031",
+    "recoverability": "recoverable",
+    "carc": "29",
+    "description": "Timely filing - good"
+  },
+  "SYN-2026-0032": {
+    "claim_id": "SYN-2026-0032",
+    "recoverability": "not_recoverable",
+    "carc": "197",
+    "description": "No prior auth"
+  },
+  "SYN-2026-0033": {
+    "claim_id": "SYN-2026-0033",
+    "recoverability": "needs_review",
+    "carc": "4",
+    "description": "Modifier mismatch"
+  },
+  "SYN-2026-0034": {
+    "claim_id": "SYN-2026-0034",
+    "recoverability": "not_recoverable",
+    "carc": "18",
+    "description": "Duplicate with ref"
+  },
+  "SYN-2026-0035": {
+    "claim_id": "SYN-2026-0035",
+    "recoverability": "needs_review",
+    "carc": "97",
+    "description": "Bundled"
+  }
+}

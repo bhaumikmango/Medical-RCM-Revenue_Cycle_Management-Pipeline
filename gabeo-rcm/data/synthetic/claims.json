@@ -1,0 +1,1194 @@
+[
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1299.97,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2026-02-11",
+      "pc_StatementBegin": "2026-01-15",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "4",
+      "pcla_AdjustmentAmount": 1299.97,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0001",
+      "ec_PayerName": "Medicare Payer 1",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2026-01-15",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB7912",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0001",
+      "recoverability": "needs_review",
+      "carc": "4",
+      "description": "Modifier mismatch"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0002",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 230.03,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-11-03",
+      "pc_StatementBegin": "2025-09-16",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 230.03,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0002",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-09-16",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4611",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0002",
+      "recoverability": "needs_review",
+      "carc": "18",
+      "description": "Duplicate no ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0003",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 3520.88,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-02-13",
+      "pc_StatementBegin": "2026-01-24",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "4",
+      "pcla_AdjustmentAmount": 3520.88,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0003",
+      "ec_PayerName": "Commercial Payer 3",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-01-24",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4527",
+      "ec_PriorAuthorization": "AUTH-444"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0003",
+      "recoverability": "needs_review",
+      "carc": "4",
+      "description": "Modifier mismatch"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0004",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4252.72,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-03-23",
+      "pc_StatementBegin": "2025-02-19",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "50",
+      "pcla_AdjustmentAmount": 4252.72,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0004",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-02-19",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB9785",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0004",
+      "recoverability": "needs_review",
+      "carc": "50",
+      "description": "Medical necessity auth"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0005",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1536.57,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-03-27",
+      "pc_StatementBegin": "2025-02-10",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "50",
+      "pcla_AdjustmentAmount": 1536.57,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0005",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-02-10",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2139",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0005",
+      "recoverability": "needs_review",
+      "carc": "50",
+      "description": "Medical necessity auth"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0006",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4927.59,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-02-28",
+      "pc_StatementBegin": "2026-01-31",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 4927.59,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0006",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-01-31",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB5554",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0006",
+      "recoverability": "needs_review",
+      "carc": "18",
+      "description": "Duplicate no ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0007",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1126.58,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2025-08-10",
+      "pc_StatementBegin": "2025-07-09",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 1126.58,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "",
+      "pc_OrigRefNo": "REF-5010"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0007",
+      "ec_PayerName": "Medicare Payer 1",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-07-09",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB9751",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0007",
+      "recoverability": "not_recoverable",
+      "carc": "18",
+      "description": "Duplicate with ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0008",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1176.11,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-02-02",
+      "pc_StatementBegin": "2025-12-19",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "252",
+      "pcla_AdjustmentAmount": 1176.11,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0008",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-12-19",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB1525",
+      "ec_PriorAuthorization": "AUTH-510"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0008",
+      "recoverability": "recoverable",
+      "carc": "252",
+      "description": "Attachment needed"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0009",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1641.92,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-12-12",
+      "pc_StatementBegin": "2025-10-18",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 1641.92,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0009",
+      "ec_PayerName": "Commercial Payer 4",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-10-18",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB3340",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0009",
+      "recoverability": "needs_review",
+      "carc": "18",
+      "description": "Duplicate no ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0010",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 3760.37,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-10-29",
+      "pc_StatementBegin": "2025-10-03",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "97",
+      "pcla_AdjustmentAmount": 3760.37,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0010",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-10-03",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB6930",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0010",
+      "recoverability": "needs_review",
+      "carc": "97",
+      "description": "Bundled"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0011",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 3803.33,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicaid",
+      "pc_ReceivedDate": "2025-09-25",
+      "pc_StatementBegin": "2025-09-10",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "97",
+      "pcla_AdjustmentAmount": 3803.33,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0011",
+      "ec_PayerName": "Medicaid Payer 2",
+      "ec_InsuranceType": "Medicaid",
+      "ec_ServiceDateFrom": "2025-09-10",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB7916",
+      "ec_PriorAuthorization": "AUTH-494"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0011",
+      "recoverability": "needs_review",
+      "carc": "97",
+      "description": "Bundled"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0012",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4858.28,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-10-24",
+      "pc_StatementBegin": "2025-09-28",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "96",
+      "pcla_AdjustmentAmount": 4858.28,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0012",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-09-28",
+      "ec_PrincipalDiagnosis": "M17.11",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB6573",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0012",
+      "recoverability": "not_recoverable",
+      "carc": "96",
+      "description": "Non-covered with remark"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0013",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4391.68,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-02-27",
+      "pc_StatementBegin": "2025-01-02",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "96",
+      "pcla_AdjustmentAmount": 4391.68,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0013",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-01-02",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB9317",
+      "ec_PriorAuthorization": "AUTH-991"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0013",
+      "recoverability": "not_recoverable",
+      "carc": "96",
+      "description": "Non-covered with remark"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0014",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1074.66,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2025-11-04",
+      "pc_StatementBegin": "2025-09-17",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "252",
+      "pcla_AdjustmentAmount": 1074.66,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0014",
+      "ec_PayerName": "Medicare Payer 2",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-09-17",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB6310",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0014",
+      "recoverability": "recoverable",
+      "carc": "252",
+      "description": "Attachment needed"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0015",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1273.32,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-10-05",
+      "pc_StatementBegin": "2026-02-18",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "29",
+      "pcla_AdjustmentAmount": 1273.32,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0015",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-02-18",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2403",
+      "ec_PriorAuthorization": "AUTH-935"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0015",
+      "recoverability": "not_recoverable",
+      "carc": "29",
+      "description": "Timely filing - bad"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0016",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 729.12,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-02-15",
+      "pc_StatementBegin": "2026-01-28",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "97",
+      "pcla_AdjustmentAmount": 729.12,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0016",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-01-28",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB5342",
+      "ec_PriorAuthorization": "AUTH-721"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0016",
+      "recoverability": "needs_review",
+      "carc": "97",
+      "description": "Bundled"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0017",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 3676.66,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-12-01",
+      "pc_StatementBegin": "2025-10-04",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 3676.66,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0017",
+      "ec_PayerName": "Commercial Payer 3",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-10-04",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB7118",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0017",
+      "recoverability": "needs_review",
+      "carc": "18",
+      "description": "Duplicate no ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0018",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 413.73,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-05-31",
+      "pc_StatementBegin": "2025-05-07",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "16",
+      "pcla_AdjustmentAmount": 413.73,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0018",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-05-07",
+      "ec_PrincipalDiagnosis": "",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4608",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0018",
+      "recoverability": "needs_review",
+      "carc": "16",
+      "description": "Missing info"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0019",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4536.56,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2025-05-12",
+      "pc_StatementBegin": "2025-04-28",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "4",
+      "pcla_AdjustmentAmount": 4536.56,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0019",
+      "ec_PayerName": "Medicare Payer 1",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-04-28",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB5562",
+      "ec_PriorAuthorization": "AUTH-319"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0019",
+      "recoverability": "needs_review",
+      "carc": "4",
+      "description": "Modifier mismatch"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0020",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1290.69,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-12-02",
+      "pc_StatementBegin": "2025-10-23",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "197",
+      "pcla_AdjustmentAmount": 1290.69,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0020",
+      "ec_PayerName": "Commercial Payer 4",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-10-23",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2545",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0020",
+      "recoverability": "not_recoverable",
+      "carc": "197",
+      "description": "No prior auth"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0021",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 2114.4,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-08-07",
+      "pc_StatementBegin": "2025-07-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "50",
+      "pcla_AdjustmentAmount": 2114.4,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0021",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-07-01",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB7596",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0021",
+      "recoverability": "needs_review",
+      "carc": "50",
+      "description": "Medical necessity auth"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0022",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1032.02,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2025-05-30",
+      "pc_StatementBegin": "2025-05-08",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "16",
+      "pcla_AdjustmentAmount": 1032.02,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0022",
+      "ec_PayerName": "Medicare Payer 2",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-05-08",
+      "ec_PrincipalDiagnosis": "",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4006",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0022",
+      "recoverability": "needs_review",
+      "carc": "16",
+      "description": "Missing info"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0023",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 579.75,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-09-29",
+      "pc_StatementBegin": "2025-08-15",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "16",
+      "pcla_AdjustmentAmount": 579.75,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0023",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-08-15",
+      "ec_PrincipalDiagnosis": "",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB3724",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0023",
+      "recoverability": "needs_review",
+      "carc": "16",
+      "description": "Missing info"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0024",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1956.97,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-02-20",
+      "pc_StatementBegin": "2025-01-31",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "50",
+      "pcla_AdjustmentAmount": 1956.97,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0024",
+      "ec_PayerName": "Commercial Payer 3",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-01-31",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB5673",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0024",
+      "recoverability": "needs_review",
+      "carc": "50",
+      "description": "Medical necessity auth"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0025",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 2484.69,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-01-29",
+      "pc_StatementBegin": "2025-12-05",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "97",
+      "pcla_AdjustmentAmount": 2484.69,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0025",
+      "ec_PayerName": "Commercial Payer 3",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-12-05",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB1958",
+      "ec_PriorAuthorization": "AUTH-655"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0025",
+      "recoverability": "needs_review",
+      "carc": "97",
+      "description": "Bundled"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0026",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 2962.47,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-08-14",
+      "pc_StatementBegin": "2025-01-30",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "29",
+      "pcla_AdjustmentAmount": 2962.47,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0026",
+      "ec_PayerName": "Commercial Payer 1",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-01-30",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4044",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0026",
+      "recoverability": "not_recoverable",
+      "carc": "29",
+      "description": "Timely filing - bad"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0027",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4713.82,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-08-12",
+      "pc_StatementBegin": "2025-07-26",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 4713.82,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0027",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-07-26",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2343",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0027",
+      "recoverability": "needs_review",
+      "carc": "18",
+      "description": "Duplicate no ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0028",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1100.87,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-07-07",
+      "pc_StatementBegin": "2025-06-11",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "97",
+      "pcla_AdjustmentAmount": 1100.87,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0028",
+      "ec_PayerName": "Commercial Payer 2",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-06-11",
+      "ec_PrincipalDiagnosis": "M17.11",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB7484",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0028",
+      "recoverability": "needs_review",
+      "carc": "97",
+      "description": "Bundled"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0029",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4685.1,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2025-08-08",
+      "pc_StatementBegin": "2025-06-11",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "96",
+      "pcla_AdjustmentAmount": 4685.1,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0029",
+      "ec_PayerName": "Medicare Payer 4",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-06-11",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2200",
+      "ec_PriorAuthorization": "AUTH-618"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0029",
+      "recoverability": "not_recoverable",
+      "carc": "96",
+      "description": "Non-covered with remark"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0030",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1910.68,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-09-14",
+      "pc_StatementBegin": "2025-02-05",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "29",
+      "pcla_AdjustmentAmount": 1910.68,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0030",
+      "ec_PayerName": "Commercial Payer 4",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-02-05",
+      "ec_PrincipalDiagnosis": "M17.11",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB9666",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0030",
+      "recoverability": "not_recoverable",
+      "carc": "29",
+      "description": "Timely filing - bad"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0031",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 4700.76,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2025-12-29",
+      "pc_StatementBegin": "2025-12-06",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "29",
+      "pcla_AdjustmentAmount": 4700.76,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0031",
+      "ec_PayerName": "Medicare Payer 3",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-12-06",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2753",
+      "ec_PriorAuthorization": "AUTH-259"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0031",
+      "recoverability": "recoverable",
+      "carc": "29",
+      "description": "Timely filing - good"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0032",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 1780.11,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2025-06-12",
+      "pc_StatementBegin": "2025-04-18",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "197",
+      "pcla_AdjustmentAmount": 1780.11,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0032",
+      "ec_PayerName": "Commercial Payer 5",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2025-04-18",
+      "ec_PrincipalDiagnosis": "E11.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB5114",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0032",
+      "recoverability": "not_recoverable",
+      "carc": "197",
+      "description": "No prior auth"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0033",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 2175.52,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicaid",
+      "pc_ReceivedDate": "2025-04-08",
+      "pc_StatementBegin": "2025-02-17",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "4",
+      "pcla_AdjustmentAmount": 2175.52,
+      "pcl_ProcedureCode": "72148",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0033",
+      "ec_PayerName": "Medicaid Payer 1",
+      "ec_InsuranceType": "Medicaid",
+      "ec_ServiceDateFrom": "2025-02-17",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB6464",
+      "ec_PriorAuthorization": "AUTH-752"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0033",
+      "recoverability": "needs_review",
+      "carc": "4",
+      "description": "Modifier mismatch"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0034",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 2803.23,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicaid",
+      "pc_ReceivedDate": "2026-02-22",
+      "pc_StatementBegin": "2026-01-15",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 2803.23,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "",
+      "pc_OrigRefNo": "REF-2232"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0034",
+      "ec_PayerName": "Medicaid Payer 5",
+      "ec_InsuranceType": "Medicaid",
+      "ec_ServiceDateFrom": "2026-01-15",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB2832",
+      "ec_PriorAuthorization": "AUTH-807"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0034",
+      "recoverability": "not_recoverable",
+      "carc": "18",
+      "description": "Duplicate with ref"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-0035",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 2954.3,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicaid",
+      "pc_ReceivedDate": "2025-02-21",
+      "pc_StatementBegin": "2025-01-19",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "97",
+      "pcla_AdjustmentAmount": 2954.3,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-0035",
+      "ec_PayerName": "Medicaid Payer 4",
+      "ec_InsuranceType": "Medicaid",
+      "ec_ServiceDateFrom": "2025-01-19",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB1685",
+      "ec_PriorAuthorization": ""
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-0035",
+      "recoverability": "needs_review",
+      "carc": "97",
+      "description": "Bundled"
+    }
+  }
+]
