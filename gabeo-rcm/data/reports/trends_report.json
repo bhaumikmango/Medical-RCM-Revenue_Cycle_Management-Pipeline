@@ -1,0 +1,20 @@
+[
+  {
+    "payer": "Commercial Payer 5",
+    "procedure_code": "99214",
+    "carc_code": "18",
+    "total_claims": 2,
+    "avg_denied_amount": 2471.92,
+    "systemic_frequency_score": 5.7,
+    "historical_recovery_rate": 0.0
+  },
+  {
+    "payer": "Commercial Payer 5",
+    "procedure_code": "27447",
+    "carc_code": "97",
+    "total_claims": 2,
+    "avg_denied_amount": 2244.74,
+    "systemic_frequency_score": 5.7,
+    "historical_recovery_rate": 0.0
+  }
+]

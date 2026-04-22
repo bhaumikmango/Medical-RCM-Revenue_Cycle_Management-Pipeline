@@ -1,0 +1,127 @@
+[
+  {
+    "cluster_id": 0,
+    "num_claims": 13,
+    "total_value": 15937.45,
+    "dominant_payer": "Commercial Payer 5",
+    "dominant_carc": "18",
+    "dominant_procedure": "72148",
+    "recovery_rate_pct": 50,
+    "claims": [
+      "SYN-2026-0001",
+      "SYN-2026-0002",
+      "SYN-2026-0005",
+      "SYN-2026-0021",
+      "SYN-2026-0022",
+      "SYN-2026-0007",
+      "SYN-2026-0023",
+      "SYN-2026-0024",
+      "SYN-2026-0009",
+      "SYN-2026-0028",
+      "SYN-2026-0016",
+      "SYN-2026-0033",
+      "SYN-2026-0018"
+    ],
+    "summary_json": {
+      "cluster_label": "Commercial Payer 5 \u2014 CARC 18",
+      "dominant_denial_reason": "The primary reason for the denial cluster is the CARC 18 denial, which indicates that the claim was denied due to missing or insufficient medical documentation. This is consistent across multiple claims, especially for the dominant procedure MRI Lumbar Spine (CPT code 72148).",
+      "recovery_opportunity": "Based on the estimated recoverability rate of 50%, the potential recovery amount from this cluster is approximately $7,968.53. This represents a significant portion of the total value, allowing for substantial recovery if the issue is addressed.",
+      "estimated_recovery_rate": 50,
+      "recommended_bulk_action": "Request missing medical documentation for all claims with CARC 18 and resubmit them for review."
+    }
+  },
+  {
+    "cluster_id": 1,
+    "num_claims": 5,
+    "total_value": 9217.27,
+    "dominant_payer": "Commercial Payer 5",
+    "dominant_carc": "29",
+    "dominant_procedure": "99214",
+    "recovery_rate_pct": 0,
+    "claims": [
+      "SYN-2026-0020",
+      "SYN-2026-0026",
+      "SYN-2026-0030",
+      "SYN-2026-0015",
+      "SYN-2026-0032"
+    ],
+    "summary_json": {
+      "cluster_label": "Commercial Payer 5 \u2014 CARC 29",
+      "dominant_denial_reason": "The dominant denial reason is CARC 29, which indicates a medical necessity denial for the procedure 99214. This denial is specific to the payer's policy on office visits.",
+      "recovery_opportunity": "The estimated recoverable amount is $9217.27 with a recovery rate of 0%. However, a targeted appeal for these claims could yield a potential recovery.",
+      "estimated_recovery_rate": "0",
+      "recommended_bulk_action": "Contact Commercial Payer 5 to appeal the CARC 29 denials for all claims in this cluster."
+    }
+  },
+  {
+    "cluster_id": 2,
+    "num_claims": 12,
+    "total_value": 45825.83,
+    "dominant_payer": "Commercial Payer 3",
+    "dominant_carc": "18",
+    "dominant_procedure": "99214",
+    "recovery_rate_pct": 50,
+    "claims": [
+      "SYN-2026-0003",
+      "SYN-2026-0004",
+      "SYN-2026-0006",
+      "SYN-2026-0025",
+      "SYN-2026-0010",
+      "SYN-2026-0011",
+      "SYN-2026-0027",
+      "SYN-2026-0013",
+      "SYN-2026-0017",
+      "SYN-2026-0034",
+      "SYN-2026-0019",
+      "SYN-2026-0035"
+    ],
+    "summary_json": {
+      "cluster_label": "Commercial Payer 3 \u2014 CARC 18",
+      "dominant_denial_reason": "The claims were denied primarily due to CARC code 18, which typically indicates issues such as incorrect patient information, missing documentation, or non-covered services. This is consistent across the cluster, with 12 claims denied for this reason.",
+      "recovery_opportunity": "We have identified a cluster of 12 denied claims totaling $45,825.83 from Commercial Payer 3, with an estimated 50% recoverability rate. Taking immediate action could yield approximately $22,912.92 in potential recovery.",
+      "estimated_recovery_rate": 50,
+      "recommended_bulk_action": "Reupload the claims with corrected CARC 18 documentation and patient information to expedite recovery."
+    }
+  },
+  {
+    "cluster_id": 3,
+    "num_claims": 3,
+    "total_value": 6951.53,
+    "dominant_payer": "Commercial Payer 1",
+    "dominant_carc": "252",
+    "dominant_procedure": "72148",
+    "recovery_rate_pct": 100,
+    "claims": [
+      "SYN-2026-0008",
+      "SYN-2026-0014",
+      "SYN-2026-0031"
+    ],
+    "summary_json": {
+      "cluster_label": "Commercial Payer 1 \u2014 CARC 252",
+      "dominant_denial_reason": "The dominant denial reason is CARC 252, which indicates a medical necessity denial for the MRI Lumbar Spine procedure. All three claims in the cluster involve this CARC, with two being from Commercial Payer 1 and one from Medicare payers, but all were recoverable in the sample.",
+      "recovery_opportunity": "There is a significant recovery opportunity with $6951.53 in claims that were denied by Commercial Payer 1 due to CARC 252. The estimated recoverability rate is 100%, meaning all denied amounts could be recovered if resubmitted with proper documentation.",
+      "estimated_recovery_rate": "100",
+      "recommended_bulk_action": "Resubmit all claims with updated documentation addressing the medical necessity denial for CARC 252."
+    }
+  },
+  {
+    "cluster_id": 4,
+    "num_claims": 2,
+    "total_value": 9543.38,
+    "dominant_payer": "Commercial Payer 1",
+    "dominant_carc": "96",
+    "dominant_procedure": "99213",
+    "recovery_rate_pct": 0,
+    "claims": [
+      "SYN-2026-0012",
+      "SYN-2026-0029"
+    ],
+    "summary_json": {
+      "cluster_label": "Commercial Payer 1 \u2014 CARC 96 Claim Denials",
+      "dominant_denial_reason": "Claims are being denied due to CARC 96, which indicates a potential issue with the diagnosis code or medical necessity justification for the service provided.",
+      "recovery_opportunity": "The total value of these denied claims is $9543.38. If we can successfully recover a portion of these, we could improve revenue. We should investigate the specific reasons for denial and appeal if appropriate.",
+      "estimated_recovery_rate": "0",
+      "recommended_bulk_action": "Review and appeal the denials for CARC 96"
+    }
+  }
+]

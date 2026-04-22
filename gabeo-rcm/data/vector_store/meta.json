@@ -6,7 +6,7 @@
     "procedure_code": "99214",
     "payer_name": "Medicare Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Modifier mismatch"
+    "root_cause": "The claim was denied due to a CARC code 4 indicating that the procedure code is inconsistent with the modifier used, specifically because the modifier field is empty, leading to a CO adjustment."
   },
   {
     "claim_id": "SYN-2026-0002",
@@ -15,7 +15,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 5",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Duplicate no ref"
+    "root_cause": "The claim was denied due to a potential duplicate claim identified by CARC code 18 and adjustment group CO, with a rule_engine analysis indicating a need for manual verification."
   },
   {
     "claim_id": "SYN-2026-0003",
@@ -24,7 +24,7 @@
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 3",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Modifier mismatch"
+    "root_cause": "The claim was denied due to the procedure code being inconsistent with a modifier, as the modifier field is empty."
   },
   {
     "claim_id": "SYN-2026-0004",
@@ -33,7 +33,7 @@
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Medical necessity auth"
+    "root_cause": "The claim was denied due to CARC code 50, indicating that the service provided lacks medical necessity according to the payer's determination."
   },
   {
     "claim_id": "SYN-2026-0005",
@@ -42,7 +42,7 @@
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 5",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Medical necessity auth"
+    "root_cause": "The claim was denied due to CARC code 50, indicating that the procedure code 72148 with modifier 25 is not deemed medically necessary based on the principal diagnosis M54.5."
   },
   {
     "claim_id": "SYN-2026-0006",
@@ -51,7 +51,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Duplicate no ref"
+    "root_cause": "The claim was denied due to a potential duplicate claim identified by CARC code 18 with adjustment group CO."
   },
   {
     "claim_id": "SYN-2026-0007",
@@ -59,8 +59,8 @@
     "insurance_type": "Medicare",
     "procedure_code": "72148",
     "payer_name": "Medicare Payer 1",
-    "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Duplicate with ref"
+    "recoverability": "needs_review",
+    "root_cause": "The claim was denied due to CARC code 18, indicating an exact duplicate claim/service."
   },
   {
     "claim_id": "SYN-2026-0008",
@@ -69,7 +69,7 @@
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 1",
     "recoverability": "recoverable",
-    "root_cause": "Mock root cause for Attachment needed"
+    "root_cause": "The claim was denied due to the payer requiring an attachment or other documentation to adjudicate the claim, specifically for the procedure performed on 2025-12-19."
   },
   {
     "claim_id": "SYN-2026-0009",
@@ -78,7 +78,7 @@
     "procedure_code": "27447",
     "payer_name": "Commercial Payer 4",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Duplicate no ref"
+    "root_cause": "The claim was denied due to a potential duplicate claim identified by CARC code 18 and adjustment group CO, requiring manual verification."
   },
   {
     "claim_id": "SYN-2026-0010",
@@ -87,7 +87,7 @@
     "procedure_code": "27447",
     "payer_name": "Commercial Payer 5",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Bundled"
+    "root_cause": "The claim was denied due to CARC code 97, indicating that the benefit for the service provided is included in the payment/allowance for another service/procedure that has already been adjudicated."
   },
   {
     "claim_id": "SYN-2026-0011",
@@ -96,7 +96,7 @@
     "procedure_code": "99213",
     "payer_name": "Medicaid Payer 2",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Bundled"
+    "root_cause": "The claim was denied due to CARC code 97, indicating that the benefit for the CPT code 99213 with modifier 25 was included in the payment/allowance for another service/procedure that has already been adjudicated."
   },
   {
     "claim_id": "SYN-2026-0012",
@@ -105,7 +105,7 @@
     "procedure_code": "99213",
     "payer_name": "Commercial Payer 1",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Non-covered with remark"
+    "root_cause": "The claim was denied due to the CARC code 96, indicating that the charge was non-covered by the insurance provider Commercial Payer 1."
   },
   {
     "claim_id": "SYN-2026-0013",
@@ -113,8 +113,8 @@
     "insurance_type": "Commercial",
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 5",
-    "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Non-covered with remark"
+    "recoverability": "needs_review",
+    "root_cause": "The claim was denied due to the payer's determination that the procedure code 72148 with modifier 25 is a non-covered charge (CARC code 96), as the diagnosis code provided does not support the procedure's medical necessity or the service does not meet the payer's coverage criteria."
   },
   {
     "claim_id": "SYN-2026-0014",
@@ -123,7 +123,7 @@
     "procedure_code": "72148",
     "payer_name": "Medicare Payer 2",
     "recoverability": "recoverable",
-    "root_cause": "Mock root cause for Attachment needed"
+    "root_cause": "The claim was denied due to a missing attachment or other documentation required to adjudicate the service provided."
   },
   {
     "claim_id": "SYN-2026-0015",
@@ -132,7 +132,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 5",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Timely filing - bad"
+    "root_cause": "The claim was denied due to exceeding the 180-day filing limit for Commercial payer claims as indicated by CARC code 29."
   },
   {
     "claim_id": "SYN-2026-0016",
@@ -141,7 +141,7 @@
     "procedure_code": "27447",
     "payer_name": "Commercial Payer 5",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Bundled"
+    "root_cause": "The claim was denied due to the payer's determination that the service is bundled with another service that has already been adjudicated, resulting in a CARC code 97 denial."
   },
   {
     "claim_id": "SYN-2026-0017",
@@ -150,7 +150,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 3",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Duplicate no ref"
+    "root_cause": "The claim was denied due to a potential duplicate claim identified by CARC code 18 with adjustment group CO, as indicated by the rule_engine analysis."
   },
   {
     "claim_id": "SYN-2026-0018",
@@ -159,7 +159,7 @@
     "procedure_code": "99213",
     "payer_name": "Commercial Payer 5",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Missing info"
+    "root_cause": "The claim was denied due to the absence of principal diagnosis information, which is a required field for proper claim processing."
   },
   {
     "claim_id": "SYN-2026-0019",
@@ -168,7 +168,7 @@
     "procedure_code": "72148",
     "payer_name": "Medicare Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Modifier mismatch"
+    "root_cause": "The claim was denied due to CARC code 4, indicating that the procedure code is inconsistent with the modifier used, specifically because the procedure modifier field is empty."
   },
   {
     "claim_id": "SYN-2026-0020",
@@ -177,7 +177,7 @@
     "procedure_code": "27447",
     "payer_name": "Commercial Payer 4",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for No prior auth"
+    "root_cause": "The claim was denied due to the absence of prior authorization for the procedure performed, as indicated by the CARC code 197 and the empty prior_authorization field."
   },
   {
     "claim_id": "SYN-2026-0021",
@@ -186,7 +186,7 @@
     "procedure_code": "99213",
     "payer_name": "Commercial Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Medical necessity auth"
+    "root_cause": "The claim was denied due to CARC code 50, indicating that the service provided is not deemed medically necessary by the payer."
   },
   {
     "claim_id": "SYN-2026-0022",
@@ -195,7 +195,7 @@
     "procedure_code": "27447",
     "payer_name": "Medicare Payer 2",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Missing info"
+    "root_cause": "The claim was denied due to the absence of principal diagnosis information, which is a required field for Medicare claims."
   },
   {
     "claim_id": "SYN-2026-0023",
@@ -204,7 +204,7 @@
     "procedure_code": "99213",
     "payer_name": "Commercial Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Missing info"
+    "root_cause": "The claim was denied due to the absence of principal diagnosis information, which is a required field for proper claim processing."
   },
   {
     "claim_id": "SYN-2026-0024",
@@ -213,7 +213,7 @@
     "procedure_code": "27447",
     "payer_name": "Commercial Payer 3",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Medical necessity auth"
+    "root_cause": "The claim was denied due to CARC code 50, indicating that the service provided is not considered medically necessary by the payer."
   },
   {
     "claim_id": "SYN-2026-0025",
@@ -222,7 +222,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 3",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Bundled"
+    "root_cause": "The claim was denied due to payer determination that the service is bundled with another service that has already been adjudicated, resulting in a CARC code 97 denial."
   },
   {
     "claim_id": "SYN-2026-0026",
@@ -231,7 +231,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 1",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Timely filing - bad"
+    "root_cause": "The claim was denied due to exceeding the 180-day filing limit for Commercial payer claims."
   },
   {
     "claim_id": "SYN-2026-0027",
@@ -240,7 +240,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 5",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Duplicate no ref"
+    "root_cause": "The claim was denied due to a potential duplicate claim identified by CARC code 18 with adjustment group CO, indicating that the service might have been previously billed to the same payer."
   },
   {
     "claim_id": "SYN-2026-0028",
@@ -249,7 +249,7 @@
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 2",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Bundled"
+    "root_cause": "The claim was denied due to CARC code 97, indicating that the benefit for the service is included in the payment/allowance for another service/procedure that has already been adjudicated."
   },
   {
     "claim_id": "SYN-2026-0029",
@@ -258,7 +258,7 @@
     "procedure_code": "99213",
     "payer_name": "Medicare Payer 4",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Non-covered with remark"
+    "root_cause": "The claim was denied due to a non-covered service under Medicare, as indicated by the CARC code 96 which signifies non-covered charges, and the adjustment group CO confirms that the entire claim amount was denied."
   },
   {
     "claim_id": "SYN-2026-0030",
@@ -267,7 +267,7 @@
     "procedure_code": "99214",
     "payer_name": "Commercial Payer 4",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Timely filing - bad"
+    "root_cause": "The claim was denied due to exceeding the 180-day filing limit for Commercial payer claims, as indicated by CARC code 29."
   },
   {
     "claim_id": "SYN-2026-0031",
@@ -276,7 +276,7 @@
     "procedure_code": "99214",
     "payer_name": "Medicare Payer 3",
     "recoverability": "recoverable",
-    "root_cause": "Mock root cause for Timely filing - good"
+    "root_cause": "The claim was denied due to the expiration of the filing time limit as indicated by CARC code 29."
   },
   {
     "claim_id": "SYN-2026-0032",
@@ -285,7 +285,7 @@
     "procedure_code": "72148",
     "payer_name": "Commercial Payer 5",
     "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for No prior auth"
+    "root_cause": "The claim was denied due to the absence of prior authorization, as indicated by CARC code 197."
   },
   {
     "claim_id": "SYN-2026-0033",
@@ -294,7 +294,7 @@
     "procedure_code": "72148",
     "payer_name": "Medicaid Payer 1",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Modifier mismatch"
+    "root_cause": "The claim was denied due to CARC code 4, which indicates that the procedure code is inconsistent with the modifier used, specifically because the modifier field is empty, leading to a CO adjustment."
   },
   {
     "claim_id": "SYN-2026-0034",
@@ -302,8 +302,8 @@
     "insurance_type": "Medicaid",
     "procedure_code": "27447",
     "payer_name": "Medicaid Payer 5",
-    "recoverability": "not_recoverable",
-    "root_cause": "Mock root cause for Duplicate with ref"
+    "recoverability": "needs_review",
+    "root_cause": "The claim was denied due to an exact duplicate claim/service as indicated by CARC code 18 and adjustment group CO."
   },
   {
     "claim_id": "SYN-2026-0035",
@@ -312,6 +312,6 @@
     "procedure_code": "99214",
     "payer_name": "Medicaid Payer 4",
     "recoverability": "needs_review",
-    "root_cause": "Mock root cause for Bundled"
+    "root_cause": "The claim was denied due to CARC code 97, indicating that the benefit for the CPT code 99214 with modifier 25 was included in the payment/allowance for another service/procedure that has already been adjudicated."
   }
 ]
