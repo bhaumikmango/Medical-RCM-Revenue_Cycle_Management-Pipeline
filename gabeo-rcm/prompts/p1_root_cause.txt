@@ -1,0 +1,34 @@
+You are a healthcare revenue cycle expert analyzing a denied insurance claim.
+
+## Claim Data
+{claim_json}
+
+## CARC Code Reference
+Code {carc_code}: {carc_description}
+Group: {adjustment_group}
+
+## Rule Engine Pre-Analysis
+{rule_engine_flags}
+
+## Similar Historical Claims
+{similar_claims_context}
+
+## Task
+Analyze this denial. Respond ONLY with valid JSON matching this schema:
+{{
+  "root_cause": "...",
+  "carc_interpretation": "...",
+  "recoverability": "recoverable|not_recoverable|needs_review",
+  "confidence": 0.0-1.0,
+  "evidence": ["field: value — significance", ...],
+  "recommended_action": "..."
+}}
+
+Rules:
+- Trust rule_engine_flags for date math and field checks. Do not recalculate them.
+- CARC 29: timely filing verdict is already computed. Focus on appeal strategy only.
+- CARC 16: list all missing fields from rule_engine_flags in evidence.
+- CARC 252: recoverability is always "recoverable", confidence is always 0.9. Only provide recommended_action.
+- CARC 253 (sequestration): always not_recoverable, confidence 1.0.
+- Do not invent fields not in the data.
+- Do not emit <think> tags or chain-of-thought. Respond ONLY with the JSON object.

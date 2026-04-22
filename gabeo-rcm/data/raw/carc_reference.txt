@@ -1,0 +1,30 @@
+### 1. Assignment Critical CARC Codes
+These codes were explicitly highlighted in the Gabeo AI project documentation as common and essential to handle.
+
+* **16**: Claim/service lacks information or has a submission/billing error. This code requires a Remark Code for further detail.
+* **18**: Exact duplicate claim/service. Often indicates a workflow error.
+* **29**: The time limit for filing has expired (a critical denial often requiring a timely filing appeal).
+* **50**: These are non-covered services because the payer does not deem them a "medical necessity".
+* **96**: Non-covered charge(s). This is a general denial that requires at least one Remark Code.
+* **97**: The benefit for this service is included in the payment for another service already adjudicated (Bundling issue).
+* **197**: Pre-certification/authorization/notification is absent.
+* **252**: An attachment is required to adjudicate the claim.
+* **4**: The procedure code is inconsistent with the modifier used.
+
+### 2. High-Priority Official & Industry Standard Codes
+These codes are identified in the provided reference as critical for coordination of benefits, medical necessity, and regulatory adjustments.
+
+* **22**: This care may be covered by another payer per coordination of benefits.
+* **11**: The diagnosis is inconsistent with the procedure.
+* **45**: Charge exceeds the fee schedule/maximum allowable or contracted fee arrangement.
+* **150**: The payer deems the information submitted does not support this level of service.
+* **253**: Sequestration (Federal budget adjustment; generally not appealable).
+* **19**: This is a work-related injury and is the liability of the Worker's Compensation Carrier.
+* **27**: Expenses were incurred after coverage was terminated.
+
+### 3. Usage & Implementation Notes
+When integrating these into your system, pay attention to specific usage instructions found in the data:
+
+* **Remark Code Requirement**: Codes **16** and **96** MUST be accompanied by a Remark Code to be valid.
+* **Deactivated Codes**: Be aware of codes with "Stop" dates. For example, Code **15** (Authorization missing) was deactivated on 05/01/2018.
+* **Data Location**: These codes are primarily found in the **EDI 835 (Remittance Advice)** data, specifically within the claim or service line adjustment segments.
