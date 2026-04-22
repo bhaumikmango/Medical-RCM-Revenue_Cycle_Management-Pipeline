@@ -9,6 +9,7 @@ from src.storage.claim_vector_store import TurboStore
 from src.analysis.p2_pattern_match import PatternMatcher
 from src.storage.claim_store import ClaimStore
 from src.analysis.p3_clustering import DenialClusterer
+from src.analysis.trend_reporter import TrendReporter
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,7 @@ class Pipeline:
         
         self.claim_store = ClaimStore()
         self.clusterer = DenialClusterer()
+        self.trend_reporter = TrendReporter()
 
     def run_batch_analysis(self, claims_data: List[dict]):
         """
@@ -58,3 +60,11 @@ class Pipeline:
         combined_data = self.claim_store.get_all_denied_claims_with_analysis()
         clusters = self.clusterer.cluster_denials(combined_data)
         return clusters
+
+    def run_trend_analysis(self, min_claims: int = 2):
+        """
+        Runs the systemic trend report (Requirement P2.3).
+        """
+        trends = self.trend_reporter.generate_systemic_trends(min_claims=min_claims)
+        self.trend_reporter.save_report(trends)
+        return trends
