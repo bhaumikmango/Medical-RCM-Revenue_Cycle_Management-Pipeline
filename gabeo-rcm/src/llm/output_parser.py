@@ -41,7 +41,7 @@ class OutputParser:
             
         if parsed and all(k in parsed for k in self.REQUIRED_KEYS):
             # Valid parse
-            return DenialAnalysis(
+            analysis = DenialAnalysis(
                 claim_id=claim_id,
                 root_cause=str(parsed["root_cause"]),
                 carc_interpretation=str(parsed["carc_interpretation"]),
@@ -51,6 +51,13 @@ class OutputParser:
                 recommended_action=str(parsed["recommended_action"]),
                 rule_engine_flags=rule_flags or {}
             )
+            
+            # Expert Suggestion: R1 Consistency Guard
+            # If model identifies not_recoverable and rule engine confirms it was late, force 1.0 confidence
+            if analysis.recoverability == "not_recoverable" and rule_flags and rule_flags.get("filed_late"):
+                analysis.confidence = 1.0
+                
+            return analysis
             
         # Fallback if invalid format or parse failure
         logger.warning(f"Using fallback parser for {claim_id}. Output was invalid.")

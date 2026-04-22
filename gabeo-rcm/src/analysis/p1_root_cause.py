@@ -71,8 +71,9 @@ class RootCauseAnalyzer:
                 flags["confidence"] = 1.0
                 flags["evidence"].append(f"Claim frequency is {claim.claim_frequency} (Correction/Void). Not a duplicate.")
             else:
+                # Expert Suggestion: Raise to 0.85 for Freq 1, but keep as needs_review
                 flags["recoverability"] = "needs_review"
-                flags["confidence"] = 0.7
+                flags["confidence"] = 0.85
                 flags["evidence"].append("Original claim frequency. Needs manual verification of duplicate status.")
             
         # CARC 16: Missing Info
@@ -85,6 +86,8 @@ class RootCauseAnalyzer:
             
             if missing:
                 flags["evidence"].extend([f"Missing field: {m}" for m in missing])
+            
+            # Expert Suggestion: Detection is high (0.9), but ALWAYS needs_review
             flags["confidence"] = 0.9
             flags["recoverability"] = "needs_review"
             
@@ -99,15 +102,25 @@ class RootCauseAnalyzer:
         elif carc == "50":
             if not claim.prior_authorization:
                 flags["evidence"].append("No prior authorization found for potential medical necessity.")
-                flags["confidence"] = 0.85
+                # Expert Suggestion: Drop to 0.75 to let LLM reason about payer/dx alignment
+                flags["confidence"] = 0.75
                 flags["recoverability"] = "needs_review"
                 
         # CARC 96: Non-covered
         elif carc == "96":
             if not claim.remark_codes:
                 flags["evidence"].append("MISSING_REMARK_CODE: CARC 96 requires a remark code per EDI standards.")
-            flags["confidence"] = 0.9
-            flags["recoverability"] = "not_recoverable"
+                # Expert Suggestion: Absence of remark means LESS info, drop to 0.5
+                flags["confidence"] = 0.5
+                flags["recoverability"] = "needs_review"
+            elif "N130" in claim.remark_codes:
+                # Expert Suggestion: N130 (Not covered) is a strong signal
+                flags["evidence"].append("Remark N130 present: Service explicitly not covered by this payer.")
+                flags["confidence"] = 0.9
+                flags["recoverability"] = "not_recoverable"
+            else:
+                flags["confidence"] = 0.7
+                flags["recoverability"] = "needs_review"
             
         # CARC 4: Modifier
         elif carc == "4":
@@ -118,8 +131,10 @@ class RootCauseAnalyzer:
                 
         # CARC 97: Bundled
         elif carc == "97":
-            flags["confidence"] = 0.75
+            # Expert Suggestion: No parent ID available, drop to 0.6
+            flags["confidence"] = 0.6
             flags["recoverability"] = "needs_review"
+            flags["evidence"].append("Parent service claim ID not available in current data — manual bundling review required.")
             
         # CARC 252: Attachment
         elif carc == "252":
@@ -156,12 +171,18 @@ class RootCauseAnalyzer:
         # Parse and override LLM if rule engine has deterministic fields
         analysis = self.parser.parse_denial_analysis(raw_output, claim.claim_id, rule_flags)
         
+        # Expert Suggestion: Force CARC 16 to needs_review regardless of LLM
+        if claim.carc_code == "16":
+            analysis.recoverability = "needs_review"
+            
         # Hard override for CARC 252 as per plan
         if claim.carc_code == "252":
             analysis.recoverability = "recoverable"
             analysis.confidence = 0.9
             
-        # If rule engine has a deterministic verdict and high confidence, prefer it
+        # Conflict Resolution Upgrade:
+        # If rule engine has a deterministic verdict (>= 0.9), override ONLY the recoverability
+        # Never override the recommended_action from the LLM.
         if rule_flags["recoverability"] and rule_flags["confidence"] and rule_flags["confidence"] >= 0.9:
             analysis.recoverability = rule_flags["recoverability"]
             # Blend evidence

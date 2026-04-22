@@ -44,10 +44,10 @@ CARC 252 (Attachment Missing): Always recoverable, confidence 0.9.
 CARC 253 (Sequestration): Always not_recoverable, confidence 1.0.
 
 Confidence calibration:
-- 1.0: deterministic rule (duplicate confirmed, sequestration)
-- 0.8–0.9: strong claim evidence
-- 0.6–0.7: circumstantial or payer behavior dependent
-- 0.4–0.5: insufficient data -> use needs_review
+- 1.0: deterministic rule (e.g. duplicate confirmed via frequency, sequestration, or verified late filing)
+- 0.8–0.9: strong claim evidence (e.g. clearly missing fields or prior auth)
+- 0.6–0.7: circumstantial or payer behavior dependent (e.g. medical necessity, bundling)
+- 0.4–0.5: insufficient data or missing remark codes -> use needs_review
 - Never exceed 0.8 if similar_claims_context is empty.
 
 Respond ONLY with the JSON object.

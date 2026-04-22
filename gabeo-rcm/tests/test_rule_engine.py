@@ -52,4 +52,34 @@ def test_rule_engine_carc_18_no_ref(analyzer):
     claim = dummy_claim("18")
     flags = analyzer.run_rule_engine(claim)
     assert flags["recoverability"] == "needs_review"
-    assert flags["confidence"] == 0.7
+    assert flags["confidence"] == 0.85
+
+def test_rule_engine_carc_50_logic(analyzer):
+    claim = dummy_claim("50")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "needs_review"
+    assert flags["confidence"] == 0.75
+
+def test_rule_engine_carc_97_logic(analyzer):
+    claim = dummy_claim("97")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "needs_review"
+    assert flags["confidence"] == 0.6
+
+def test_rule_engine_carc_96_remark_absent(analyzer):
+    claim = dummy_claim("96", remark_codes="")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "needs_review"
+    assert flags["confidence"] == 0.5
+
+def test_rule_engine_carc_96_remark_present(analyzer):
+    claim = dummy_claim("96", remark_codes="N130")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "not_recoverable"
+    assert flags["confidence"] == 0.9
+
+def test_rule_engine_carc_16_logic(analyzer):
+    claim = dummy_claim("16", principal_diagnosis="") # missing dx
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "needs_review"
+    assert flags["confidence"] == 0.9
