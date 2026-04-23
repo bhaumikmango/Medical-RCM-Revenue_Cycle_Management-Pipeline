@@ -39,6 +39,7 @@ async def generate_appeal_letter(analysis: DenialAnalysis, claim: ClaimRecord) -
         prompt = prompt_template.format(
             claim_id=claim.claim_id,
             service_date=claim.service_date_from,
+            received_date=claim.received_date,
             procedure_code=claim.procedure_code,
             procedure_description="Healthcare Service", # Default placeholder
             principal_diagnosis=claim.principal_diagnosis or "N/A",

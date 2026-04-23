@@ -68,3 +68,23 @@ class Pipeline:
         trends = self.trend_reporter.generate_systemic_trends(min_claims=min_claims)
         self.trend_reporter.save_report(trends)
         return trends
+
+    async def generate_appeal(self, claim_data: dict) -> str:
+        """
+        Orchestrates the generation of an appeal letter for a specific claim.
+        """
+        from src.analysis.appeal_writer import generate_appeal_letter
+        
+        d835 = claim_data.get("835", {})
+        d837 = claim_data.get("837", {})
+        claim_record = self.loader._to_claim_record(d835, d837)
+        
+        # Step 1: Check if analysis exists, otherwise run P1
+        # For the CLI 'appeal' command, we ensure P1 context is fresh
+        similar_ctx = self.p2_matcher.get_similar_context(claim_record)
+        analysis = self.p1_analyzer.analyze_claim(claim_record, similar_ctx)
+        
+        # Step 2: Generate Letter
+        letter = await generate_appeal_letter(analysis, claim_record)
+        
+        return letter

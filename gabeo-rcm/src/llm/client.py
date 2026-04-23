@@ -61,8 +61,7 @@ class OllamaClient:
             payload = {
                 "model": self.model,
                 "prompt": prompt,
-                "stream": False,
-                "format": "json"
+                "stream": False
             }
             
             for attempt in range(max_retries):

@@ -15,6 +15,7 @@ Payer: {payer_name}
 Insurance Type: {insurance_type}
 Subscriber ID: {subscriber_id}
 Denial Reason: {denial_reason} (CARC {carc_code})
+Received Date: {received_date}
 Current Date: {current_date}
 
 ## System Analysis
