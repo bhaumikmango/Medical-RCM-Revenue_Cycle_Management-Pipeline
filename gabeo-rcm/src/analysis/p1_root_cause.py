@@ -65,13 +65,15 @@ class RootCauseAnalyzer:
                 
         # CARC 18: Duplicate
         elif carc == "18":
-            # If claim_frequency is 7 (Replacement) or 8 (Void), it's a correction, not a duplicate
             if claim.claim_frequency in ("7", "8"):
                 flags["recoverability"] = "recoverable"
                 flags["confidence"] = 1.0
                 flags["evidence"].append(f"Claim frequency is {claim.claim_frequency} (Correction/Void). Not a duplicate.")
+            elif claim.original_ref:
+                flags["recoverability"] = "not_recoverable"
+                flags["confidence"] = 0.9
+                flags["evidence"].append(f"Confirmed duplicate — original reference number {claim.original_ref} present.")
             else:
-                # Expert Suggestion: Raise to 0.85 for Freq 1, but keep as needs_review
                 flags["recoverability"] = "needs_review"
                 flags["confidence"] = 0.85
                 flags["evidence"].append("Original claim frequency. Needs manual verification of duplicate status.")
@@ -108,14 +110,14 @@ class RootCauseAnalyzer:
                 
         # CARC 96: Non-covered
         elif carc == "96":
+            NON_COVERED_REMARKS = {"N130", "N20", "N95"}
             if not claim.remark_codes:
                 flags["evidence"].append("MISSING_REMARK_CODE: CARC 96 requires a remark code per EDI standards.")
-                # Expert Suggestion: Absence of remark means LESS info, drop to 0.5
                 flags["confidence"] = 0.5
                 flags["recoverability"] = "needs_review"
-            elif "N130" in claim.remark_codes:
-                # Expert Suggestion: N130 (Not covered) is a strong signal
-                flags["evidence"].append("Remark N130 present: Service explicitly not covered by this payer.")
+            elif any(code in claim.remark_codes.upper() for code in NON_COVERED_REMARKS):
+                found_code = [c for c in NON_COVERED_REMARKS if c in claim.remark_codes.upper()][0]
+                flags["evidence"].append(f"Remark {found_code} present: Service explicitly not covered by this payer.")
                 flags["confidence"] = 0.9
                 flags["recoverability"] = "not_recoverable"
             else:

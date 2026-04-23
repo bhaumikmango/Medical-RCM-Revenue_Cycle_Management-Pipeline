@@ -31,6 +31,7 @@ class ClaimRecord:
     subscriber_id: str
     type_of_bill: str
     rend_prov_specialty: str
+    original_ref: str = ""
 
     def to_dict(self) -> dict:
         return {k: v for k, v in self.__dict__.items()}

@@ -83,3 +83,21 @@ def test_rule_engine_carc_16_logic(analyzer):
     flags = analyzer.run_rule_engine(claim)
     assert flags["recoverability"] == "needs_review"
     assert flags["confidence"] == 0.9
+
+def test_carc18_with_original_ref_locks_not_recoverable(analyzer):
+    claim = dummy_claim("18", original_ref="REF-5010")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "not_recoverable"
+    assert flags["confidence"] == 0.9
+
+def test_carc18_without_original_ref_stays_needs_review(analyzer):
+    claim = dummy_claim("18", original_ref="")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "needs_review"
+    assert flags["confidence"] == 0.85
+
+def test_carc96_n20_remark_locks_not_recoverable(analyzer):
+    claim = dummy_claim("96", remark_codes="N20")
+    flags = analyzer.run_rule_engine(claim)
+    assert flags["recoverability"] == "not_recoverable"
+    assert flags["confidence"] == 0.9
