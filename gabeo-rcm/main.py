@@ -46,6 +46,11 @@ def main():
     appeal_parser = subparsers.add_parser("appeal", help="Generate a professional appeal letter")
     appeal_parser.add_argument("--claim", required=True, help="Path to JSON file containing single claim")
 
+    # Benchmark
+    benchmark_parser = subparsers.add_parser("benchmark", help="Run performance and latency benchmarks")
+    benchmark_parser.add_argument("--claim", default="data/samples/CLM-2026-00142.json", help="Sample claim for latency trials")
+    benchmark_parser.add_argument("--batch", default="data/synthetic/claims.json", help="Batch file for throughput testing")
+
     args = parser.parse_args()
 
     if not args.command:
@@ -142,6 +147,14 @@ def main():
         print("\n=== GENERATED APPEAL LETTER ===\n")
         print(letter)
         print(f"\nLetter saved to: {output_path}")
+
+    elif args.command == "benchmark":
+        from scripts.benchmark import Benchmarker
+        logger.info("Starting performance benchmarking...")
+        bench = Benchmarker()
+        results = bench.run_full_benchmark(args.claim, args.batch)
+        print("\n=== PERFORMANCE BENCHMARK RESULTS ===\n")
+        print(json.dumps(results, indent=2))
 
 if __name__ == "__main__":
     main()

@@ -13,8 +13,12 @@ class Loader:
         Parses the specific sample format with '835' and '837' blocks.
         """
         try:
-            with open(json_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
+            try:
+                with open(json_path, 'r', encoding='utf-8-sig') as f:
+                    data = json.load(f)
+            except UnicodeDecodeError:
+                with open(json_path, 'r', encoding='utf-16') as f:
+                    data = json.load(f)
                 
             return self._to_claim_record(data.get("835", {}), data.get("837", {}))
         except Exception as e:
