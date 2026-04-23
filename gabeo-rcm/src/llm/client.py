@@ -52,6 +52,37 @@ class OllamaClient:
                 time.sleep(2.0)
         return ""
 
+    async def generate_async(self, prompt: str, max_retries: int = 3) -> str:
+        """
+        Asynchronous non-streaming generation.
+        Uses the lock to prevent concurrent requests from crashing Ollama.
+        """
+        async with self._lock:
+            payload = {
+                "model": self.model,
+                "prompt": prompt,
+                "stream": False,
+                "format": "json"
+            }
+            
+            for attempt in range(max_retries):
+                try:
+                    async with httpx.AsyncClient(timeout=120.0) as client:
+                        response = await client.post(
+                            f"{self.base_url}/api/generate",
+                            json=payload
+                        )
+                        response.raise_for_status()
+                        data = response.json()
+                        return data.get("response", "")
+                except Exception as e:
+                    logger.warning(f"Ollama async call failed (attempt {attempt+1}/{max_retries}): {e}")
+                    if attempt == max_retries - 1:
+                        logger.error("All retries failed for Ollama async generation.")
+                        raise
+                    await asyncio.sleep(2.0)
+            return ""
+
     async def generate_stream(self, prompt: str):
         """
         Asynchronous streaming generation for the FastAPI backend.
