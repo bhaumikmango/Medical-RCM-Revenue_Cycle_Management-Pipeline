@@ -67,7 +67,8 @@ class Loader:
             subscriber_id=self._safe_str(d837.get("ec_SubscriberID")),
             type_of_bill=self._safe_str(d837.get("ec_TypeOfBill")),
             rend_prov_specialty=self._safe_str(d837.get("ec_RendProvSpecialty")),
-            original_ref=self._safe_str(d835.get("pc_OrigRefNo"))
+            original_ref=self._safe_str(d835.get("pc_OrigRefNo")),
+            patient_relationship=self._safe_str(d837.get("ec_PatientRelationship"))
         )
 
     def join_claims_from_csv(self, df_835: pd.DataFrame, df_837: pd.DataFrame) -> List[ClaimRecord]:

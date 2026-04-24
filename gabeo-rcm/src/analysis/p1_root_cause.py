@@ -46,17 +46,32 @@ class RootCauseAnalyzer:
             if received and service:
                 days = (received - service).days
                 flags["days_to_file"] = days
-                flags["confidence"] = 1.0
                 
                 is_medicare = "medicare" in claim.insurance_type.lower()
                 limit = 365 if is_medicare else 180
                 flags["filing_limit_days"] = limit
                 
-                if days > limit:
+                is_secondary = claim.patient_relationship in ("18", "19", "20", "21", "39", "40", "41")
+                has_delay_code = bool(claim.delay_reason_code and claim.delay_reason_code.strip())
+                flags["is_secondary"] = is_secondary
+                flags["has_delay_code"] = has_delay_code
+
+                if is_secondary:
+                    flags["confidence"] = 0.7
+                    flags["recoverability"] = "needs_review"
+                    flags["evidence"].append("Secondary claim (COB). Timely filing window may start from primary EOB date.")
+                    flags["override_reason"] = "Medicare secondary claim — window starts from primary EOB. Needs manual verification."
+                elif has_delay_code:
+                    flags["confidence"] = 0.75
+                    flags["recoverability"] = "needs_review"
+                    flags["evidence"].append(f"Delay reason code {claim.delay_reason_code} present. Exception may apply.")
+                elif days > limit:
+                    flags["confidence"] = 1.0
                     flags["filed_late"] = True
                     flags["recoverability"] = "not_recoverable"
                     flags["evidence"].append(f"Exceeded {limit} day limit for {claim.insurance_type}")
                 else:
+                    flags["confidence"] = 1.0
                     flags["recoverability"] = "recoverable"
                     flags["evidence"].append(f"Within {limit} day limit for {claim.insurance_type}")
             else:
@@ -81,24 +96,54 @@ class RootCauseAnalyzer:
         # CARC 16: Missing Info
         elif carc == "16":
             missing = []
-            if not claim.principal_diagnosis: missing.append("Principal Diagnosis")
-            if not claim.bill_prov_npi: missing.append("Billing Provider NPI")
-            if not claim.subscriber_id: missing.append("Subscriber ID")
-            if not claim.procedure_modifier: missing.append("Procedure Modifier")
+            if not claim.principal_diagnosis: missing.append("ec_PrincipalDiagnosis")
+            if not claim.bill_prov_npi: missing.append("ec_BillProvNPI")
+            if not claim.subscriber_id: missing.append("ec_SubscriberID")
+            if not claim.procedure_modifier: missing.append("ec_ProcedureModifier")
             
-            if missing:
-                flags["evidence"].extend([f"Missing field: {m}" for m in missing])
-            
-            # Expert Suggestion: Detection is high (0.9), but ALWAYS needs_review
-            flags["confidence"] = 0.9
+            MINOR_FIELDS = {"ec_PrincipalDiagnosis", "ec_ProcedureModifier"}
+            MAJOR_FIELDS = {"ec_BillProvNPI", "ec_SubscriberID"}
+
+            is_minor = all(f in MINOR_FIELDS for f in missing) and len(missing) <= 2
+            has_major = any(f in MAJOR_FIELDS for f in missing)
+
+            flags["missing_fields"] = missing
+            flags["missing_count"] = len(missing)
             flags["recoverability"] = "needs_review"
+            
+            if is_minor and not has_major:
+                flags["confidence"] = 0.9
+                flags["missing_severity"] = "minor"
+            elif has_major:
+                flags["confidence"] = 0.9
+                flags["missing_severity"] = "major"
+            else:
+                flags["confidence"] = 0.85
+                flags["missing_severity"] = "moderate"
+
+            if missing:
+                flags["evidence"].append(f"Missing fields ({flags['missing_severity']}): {', '.join(missing)}")
+            else:
+                flags["evidence"].append("Denial claims missing info, but core fields are present.")
             
         # CARC 197: Auth Absent
         elif carc == "197":
-            if not claim.prior_authorization:
-                flags["evidence"].append("Prior authorization field is completely empty.")
+            auth_present = bool(claim.prior_authorization and claim.prior_authorization.strip())
+            has_delay_code = bool(claim.delay_reason_code and claim.delay_reason_code.strip())
+
+            if auth_present:
+                flags["confidence"] = 0.6
+                flags["recoverability"] = "needs_review"
+                flags["evidence"].append("Prior auth ID found in claim, but payer denied as absent.")
+            elif has_delay_code:
+                flags["confidence"] = 0.7
+                flags["recoverability"] = "needs_review"
+                flags["evidence"].append(f"Delay reason code {claim.delay_reason_code} present. Retro-auth might be possible.")
+                flags["override_reason"] = f"Delay reason code {claim.delay_reason_code} present — retro-auth eligibility assessment required."
+            else:
                 flags["confidence"] = 0.9
                 flags["recoverability"] = "not_recoverable"
+                flags["evidence"].append("No prior authorization or delay reason code provided.")
                 
         # CARC 50: Medical Necessity
         elif carc == "50":
@@ -173,10 +218,6 @@ class RootCauseAnalyzer:
         # Parse and override LLM if rule engine has deterministic fields
         analysis = self.parser.parse_denial_analysis(raw_output, claim.claim_id, rule_flags)
         
-        # Expert Suggestion: Force CARC 16 to needs_review regardless of LLM
-        if claim.carc_code == "16":
-            analysis.recoverability = "needs_review"
-            
         # Hard override for CARC 252 as per plan
         if claim.carc_code == "252":
             analysis.recoverability = "recoverable"

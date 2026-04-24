@@ -30,13 +30,24 @@ Respond ONLY with valid JSON matching this exact schema:
 }}
 
 ## Rules
-CARC 29 (Timely Filing):
+CARC 29 — Timely Filing:
 - Filed late verdict is in rule_engine_flags. Do not recalculate.
-- Medicare: 365-day window. Secondary claims: window starts from primary EOB date.
-- Commercial: 90–180 days. If delay_reason_code present -> needs_review.
-- Medicaid: ~365 days, state-specific -> needs_review if borderline.
+- If rule_engine_flags contains "is_secondary": true OR ec_PatientRelationship is "18", "19", "20", "21", "39", "40", or "41":
+  * recoverability MUST be "needs_review". This is non-negotiable.
+  * Do NOT calculate days elapsed from service date. The filing window for secondary claims starts from the primary payer's EOB date, which is NOT present in this claim data.
+  * confidence MUST be <= 0.75.
+  * evidence MUST include: "ec_PatientRelationship={{value}} — secondary claim, primary EOB date required to assess filing compliance"
+  * Do not apply standard CARC 29 timely filing logic to this claim.
+- Medicare: 365-day window. Commercial: 90–180 days. 
+- If delay_reason_code present -> recoverability = "needs_review".
 
-CARC 16 (Missing Info): List every missing field from rule_engine_flags in evidence.
+CARC 16 — Missing Information:
+- recoverability = "needs_review" always. The LLM assesses correction complexity.
+- List all missing_fields from rule_engine_flags in evidence by human-readable name.
+- If missing_severity = "major": lower confidence, note clinical documentation gap.
+- If missing_severity = "minor": higher confidence, note straightforward resubmission.
+- Do not attempt to set recoverable for any CARC 16 claim.
+
 CARC 18 (Duplicate): If claim_frequency=7 or 8 -> recoverable. If 1 -> needs_review.
 CARC 50 (Medical Necessity): If diagnosis supports procedure -> needs_review. No prior auth -> lower confidence.
 CARC 197 (Prior Auth Absent): Low recoverability (0.2) unless retro-auth possible -> needs_review.
