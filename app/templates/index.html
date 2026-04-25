@@ -127,22 +127,29 @@
 
     <script>
         async function fetchData() {
-            try {
-                const stats = await fetch('/api/stats').then(res => res.json());
-                const claims = await fetch('/api/claims').then(res => res.json());
-                const trends = await fetch('/api/trends').then(res => res.json());
-                const clusters = await fetch('/api/clusters').then(res => res.json());
+            console.log("Fetching dashboard data...");
 
-                // Update Stats
+            // Parallel fetches for better performance
+            const fetchStats = fetch('/api/stats').then(res => res.json());
+            const fetchClaims = fetch('/api/claims').then(res => res.json());
+            const fetchTrends = fetch('/api/trends').then(res => res.json());
+            const fetchClusters = fetch('/api/clusters').then(res => res.json());
+
+            // Handle Stats
+            fetchStats.then(stats => {
                 document.getElementById('stat-total-count').textContent = stats.total_claims || 0;
                 document.getElementById('stat-total-value').textContent = '$' + (stats.total_value || 0).toLocaleString();
                 document.getElementById('stat-rec-value').textContent = '$' + (stats.recoverable_value || 0).toLocaleString();
                 document.getElementById('stat-rec-count').textContent = (stats.recoverable_count || 0) + ' claims identified';
                 document.getElementById('stat-rec-rate').textContent = (stats.recovery_rate || 0) + '%';
                 document.getElementById('stat-confidence').textContent = stats.avg_confidence || 0.0;
+            }).catch(err => console.error("Stats fetch failed:", err));
 
-                // Update Summary Table
+            // Handle Claims
+            fetchClaims.then(claims => {
                 const summaryTable = document.querySelector('#claims-table-summary tbody');
+                const fullTable = document.querySelector('#claims-table-full tbody');
+
                 if (claims && claims.length > 0) {
                     summaryTable.innerHTML = claims.slice(0, 5).map(c => `
                         <tr>
@@ -153,13 +160,7 @@
                             <td>${c.analysis.confidence}</td>
                         </tr>
                     `).join('');
-                } else {
-                    summaryTable.innerHTML = '<tr><td colspan="5" style="text-align:center">No claims found in database</td></tr>';
-                }
 
-                // Update Full Table
-                const fullTable = document.querySelector('#claims-table-full tbody');
-                if (claims && claims.length > 0) {
                     fullTable.innerHTML = claims.map(c => `
                         <tr>
                             <td>${c.claim.claim_id}</td>
@@ -172,10 +173,13 @@
                         </tr>
                     `).join('');
                 } else {
-                    fullTable.innerHTML = '<tr><td colspan="7" style="text-align:center">No claims found in database</td></tr>';
+                    summaryTable.innerHTML = '<tr><td colspan="5" style="text-align:center">No claims found</td></tr>';
+                    fullTable.innerHTML = '<tr><td colspan="7" style="text-align:center">No claims found</td></tr>';
                 }
+            }).catch(err => console.error("Claims fetch failed:", err));
 
-                // Update Trends
+            // Handle Trends
+            fetchTrends.then(trends => {
                 const trendsContainer = document.getElementById('trends-container');
                 if (trends && trends.length > 0) {
                     trendsContainer.innerHTML = trends.map(t => `
@@ -202,28 +206,31 @@
                 } else {
                     trendsContainer.innerHTML = '<p>No systemic patterns detected yet.</p>';
                 }
+            }).catch(err => console.error("Trends fetch failed:", err));
 
-                // Update Clusters
+            // Handle Clusters (Slowest)
+            fetchClusters.then(clusters => {
                 const clustersContainer = document.getElementById('clusters-container');
                 if (clusters && clusters.length > 0) {
                     clustersContainer.innerHTML = clusters.map(c => `
                         <div class="cluster-card">
                             <div class="cluster-header">
-                                <h4>${c.summary_json.cluster_label}</h4>
+                                <h4>${c.summary_json.cluster_label || "AI Identified Cluster"}</h4>
                                 <span class="impact">$${c.total_value.toLocaleString()} | ${c.num_claims} claims</span>
                             </div>
                             <div class="cluster-content">
-                                <p><strong>Opportunity:</strong> ${c.summary_json.recovery_opportunity}</p>
-                                <p><strong>Bulk Action:</strong> ${c.summary_json.recommended_bulk_action}</p>
+                                <p><strong>Opportunity:</strong> ${c.summary_json.recovery_opportunity || "Analyzing..."}</p>
+                                <p><strong>Bulk Action:</strong> ${c.summary_json.recommended_bulk_action || "Manual Review"}</p>
                             </div>
                         </div>
                     `).join('');
                 } else {
                     clustersContainer.innerHTML = '<p>No clusters identified yet.</p>';
                 }
-            } catch (error) {
-                console.error("Error fetching dashboard data:", error);
-            }
+            }).catch(err => {
+                console.error("Clusters fetch failed:", err);
+                document.getElementById('clusters-container').innerHTML = '<p class="error">Clustering analysis is taking longer than expected. Please check server logs.</p>';
+            });
         }
 
         function showSection(sectionId) {
