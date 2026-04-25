@@ -1190,5 +1190,273 @@
       "carc": "97",
       "description": "Bundled"
     }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-COB-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 200.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2026-07-06",
+      "pc_StatementBegin": "2025-06-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "29",
+      "pcla_AdjustmentAmount": 200.0,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-COB-001",
+      "ec_PayerName": "Medicare Part B",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-06-01",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB1001",
+      "ec_PatientRelationship": "18"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-COB-001",
+      "recoverability": "needs_review",
+      "carc": "29",
+      "description": "Medicare Secondary timely filing"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-CORR-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 150.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-02-01",
+      "pc_StatementBegin": "2026-01-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 150.0,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-CORR-001",
+      "ec_PayerName": "Aetna",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-01-01",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "7",
+      "ec_SubscriberID": "SUB2002"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-CORR-001",
+      "recoverability": "recoverable",
+      "carc": "18",
+      "description": "Corrected claim frequency 7"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-AUTH-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 3000.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-03-01",
+      "pc_StatementBegin": "2026-02-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "197",
+      "pcla_AdjustmentAmount": 3000.0,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-AUTH-001",
+      "ec_PayerName": "Cigna",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-02-01",
+      "ec_PrincipalDiagnosis": "M17.11",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB3003",
+      "ec_DelayReasonCode": "1"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-AUTH-001",
+      "recoverability": "needs_review",
+      "carc": "197",
+      "description": "No auth with delay reason"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-MISS-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 100.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicaid",
+      "pc_ReceivedDate": "2026-03-10",
+      "pc_StatementBegin": "2026-03-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "16",
+      "pcla_AdjustmentAmount": 100.0,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": "M76"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-MISS-001",
+      "ec_PayerName": "Medicaid State",
+      "ec_InsuranceType": "Medicaid",
+      "ec_ServiceDateFrom": "2026-03-01",
+      "ec_PrincipalDiagnosis": "",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4004"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-MISS-001",
+      "recoverability": "recoverable",
+      "carc": "16",
+      "description": "Missing principal diagnosis"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-COB-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 200.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicare",
+      "pc_ReceivedDate": "2026-07-06",
+      "pc_StatementBegin": "2025-06-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "29",
+      "pcla_AdjustmentAmount": 200.0,
+      "pcl_ProcedureCode": "99214",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": "N20"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-COB-001",
+      "ec_PayerName": "Medicare Part B",
+      "ec_InsuranceType": "Medicare",
+      "ec_ServiceDateFrom": "2025-06-01",
+      "ec_PrincipalDiagnosis": "M54.5",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB1001",
+      "ec_PatientRelationship": "18"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-COB-001",
+      "recoverability": "needs_review",
+      "carc": "29",
+      "description": "Medicare Secondary timely filing"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-CORR-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 150.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-02-01",
+      "pc_StatementBegin": "2026-01-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "18",
+      "pcla_AdjustmentAmount": 150.0,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "25",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-CORR-001",
+      "ec_PayerName": "Aetna",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-01-01",
+      "ec_PrincipalDiagnosis": "J06.9",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "7",
+      "ec_SubscriberID": "SUB2002"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-CORR-001",
+      "recoverability": "recoverable",
+      "carc": "18",
+      "description": "Corrected claim frequency 7"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-AUTH-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 3000.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Commercial",
+      "pc_ReceivedDate": "2026-03-01",
+      "pc_StatementBegin": "2026-02-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "197",
+      "pcla_AdjustmentAmount": 3000.0,
+      "pcl_ProcedureCode": "27447",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": ""
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-AUTH-001",
+      "ec_PayerName": "Cigna",
+      "ec_InsuranceType": "Commercial",
+      "ec_ServiceDateFrom": "2026-02-01",
+      "ec_PrincipalDiagnosis": "M17.11",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB3003",
+      "ec_DelayReasonCode": "1"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-AUTH-001",
+      "recoverability": "needs_review",
+      "carc": "197",
+      "description": "No auth with delay reason"
+    }
+  },
+  {
+    "835": {
+      "pc_ClaimID": "SYN-2026-MISS-001",
+      "pc_ClaimStatus": "4",
+      "pc_ClaimAmount": 100.0,
+      "pc_ClaimPaid": 0.0,
+      "pc_InsuranceType": "Medicaid",
+      "pc_ReceivedDate": "2026-03-10",
+      "pc_StatementBegin": "2026-03-01",
+      "pcla_AdjustmentGroup": "CO",
+      "pcla_AdjustmentReason": "16",
+      "pcla_AdjustmentAmount": 100.0,
+      "pcl_ProcedureCode": "99213",
+      "pcl_ProcedureModifier1": "",
+      "pcl_RemarkCodes": "M76"
+    },
+    "837": {
+      "ec_ClaimNo": "SYN-2026-MISS-001",
+      "ec_PayerName": "Medicaid State",
+      "ec_InsuranceType": "Medicaid",
+      "ec_ServiceDateFrom": "2026-03-01",
+      "ec_PrincipalDiagnosis": "",
+      "ec_BillProvNPI": "1234567890",
+      "ec_ClaimFrequency": "1",
+      "ec_SubscriberID": "SUB4004"
+    },
+    "ground_truth": {
+      "claim_id": "SYN-2026-MISS-001",
+      "recoverability": "recoverable",
+      "carc": "16",
+      "description": "Missing principal diagnosis"
+    }
   }
 ]

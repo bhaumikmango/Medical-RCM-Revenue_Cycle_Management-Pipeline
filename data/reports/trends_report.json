@@ -5,7 +5,7 @@
     "carc_code": "18",
     "total_claims": 2,
     "avg_denied_amount": 2471.92,
-    "systemic_frequency_score": 5.7,
+    "systemic_frequency_score": 5.1,
     "historical_recovery_rate": 0.0
   },
   {
@@ -14,7 +14,7 @@
     "carc_code": "97",
     "total_claims": 2,
     "avg_denied_amount": 2244.74,
-    "systemic_frequency_score": 5.7,
+    "systemic_frequency_score": 5.1,
     "historical_recovery_rate": 0.0
   }
 ]

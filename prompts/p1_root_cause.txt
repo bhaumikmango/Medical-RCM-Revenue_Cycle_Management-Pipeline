@@ -24,12 +24,21 @@ Respond ONLY with valid JSON matching this exact schema:
   "confidence": 0.0-1.0,
   "evidence": [
     "field_name=value — why this field matters to the denial",
-    "example: ec_DelayReasonCode='' — no delay justification present"
+    "example: ec_PrincipalDiagnosis=M54.5 — low back pain, valid indication for lumbar MRI but requires documented conservative treatment failure per most commercial payer policies"
   ],
   "recommended_action": "Specific next step for the billing team"
 }}
 
+## Output Constraints
+- The JSON object must contain EXACTLY these 6 keys: root_cause, carc_interpretation, recoverability, confidence, evidence, recommended_action.
+- Do NOT include any additional keys such as rule_engine_flags, similar_claims, flags, debug, or any internal processing fields.
+- Do NOT include any keys not listed in the schema above under any circumstances.
+- evidence must always be a non-empty array. Minimum 3 items for all CARCs. Minimum 4 items for CARC 50.
+- Each evidence item must reference a specific field name and value from the claim data followed by its clinical or administrative significance.
+- Do not include fields that are irrelevant to the specific CARC code being analyzed.
+
 ## Rules
+
 CARC 29 — Timely Filing:
 - Filed late verdict is in rule_engine_flags. Do not recalculate.
 - If rule_engine_flags contains "is_secondary": true OR ec_PatientRelationship is "18", "19", "20", "21", "39", "40", or "41":
@@ -38,7 +47,7 @@ CARC 29 — Timely Filing:
   * confidence MUST be <= 0.75.
   * evidence MUST include: "ec_PatientRelationship={{value}} — secondary claim, primary EOB date required to assess filing compliance"
   * Do not apply standard CARC 29 timely filing logic to this claim.
-- Medicare: 365-day window. Commercial: 90–180 days. 
+- Medicare: 365-day window. Commercial: 90–180 days.
 - If delay_reason_code present -> recoverability = "needs_review".
 
 CARC 16 — Missing Information:
@@ -47,18 +56,53 @@ CARC 16 — Missing Information:
 - If missing_severity = "major": lower confidence, note clinical documentation gap.
 - If missing_severity = "minor": higher confidence, note straightforward resubmission.
 - Do not attempt to set recoverable for any CARC 16 claim.
+- Do NOT include ec_DelayReasonCode in evidence for CARC 16 unless it is one of the missing fields.
 
-CARC 18 (Duplicate): If claim_frequency=7 or 8 -> recoverable. If 1 -> needs_review.
-CARC 50 (Medical Necessity): If diagnosis supports procedure -> needs_review. No prior auth -> lower confidence.
-CARC 197 (Prior Auth Absent): Low recoverability (0.2) unless retro-auth possible -> needs_review.
-CARC 252 (Attachment Missing): Always recoverable, confidence 0.9.
-CARC 253 (Sequestration): Always not_recoverable, confidence 1.0.
+CARC 18 (Duplicate):
+- If claim_frequency = 7 or 8 -> recoverable. This is a corrected or replacement claim, not a true duplicate.
+- If claim_frequency = 1 and pc_OrigRefNo present -> needs_review. Original reference exists, confirm with payer.
+- If claim_frequency = 1 and no pc_OrigRefNo -> needs_review. Request original claim reference from payer.
 
-Confidence calibration:
-- 1.0: deterministic rule (e.g. duplicate confirmed via frequency, sequestration, or verified late filing)
-- 0.8–0.9: strong claim evidence (e.g. clearly missing fields or prior auth)
-- 0.6–0.7: circumstantial or payer behavior dependent (e.g. medical necessity, bundling)
+CARC 50 — Medical Necessity:
+- If diagnosis supports procedure -> needs_review. No prior auth -> lower confidence.
+- evidence array MUST contain ALL of the following for CARC 50, no exceptions:
+  * "ec_PrincipalDiagnosis={{value}} — {{ICD10 clinical meaning}} and its relevance to the procedure"
+  * "pcl_ProcedureCode={{value}} — {{what this CPT code represents}} and typical auth requirements for this payer type"
+  * "ec_PriorAuthorization={{value}} — present or absent and its direct impact on recoverability"
+  * "ec_PayerName={{value}}, ec_InsuranceType={{value}} — payer-specific medical necessity policy context"
+  * If ec_Diag2 is present in claim data: include it as a separate evidence item citing its supporting clinical relevance
+- Do NOT include ec_DelayReasonCode in evidence for CARC 50. It is irrelevant to medical necessity denials.
+- Minimum 4 evidence items required for CARC 50. If ec_Diag2 is present, minimum is 5.
+- recommended_action for CARC 50 must reference the specific diagnosis and procedure by name, not generically.
+
+CARC 197 (Prior Auth Absent):
+- Low recoverability (0.2) unless retro-auth possible -> needs_review.
+- If ec_DelayReasonCode is present -> recoverability = "needs_review". Retro-authorization eligibility cannot be ruled out.
+- If ec_DelayReasonCode is absent and prior auth field is empty -> recoverability = "not_recoverable", confidence 0.9.
+
+CARC 252 (Attachment Missing):
+- Always recoverable, confidence 0.9.
+- evidence must specify what type of attachment is required based on procedure code and diagnosis.
+
+CARC 253 (Sequestration):
+- Always not_recoverable, confidence 1.0.
+- This is a government-mandated reduction. Do not suggest appeal.
+
+## Confidence Calibration
+- 1.0: deterministic rule match (duplicate confirmed via frequency, sequestration, verified late filing with no mitigating factors)
+- 0.8–0.9: strong unambiguous claim evidence (clearly missing fields, confirmed prior auth absence)
+- 0.6–0.7: circumstantial or payer-behavior dependent (medical necessity, bundling, modifier disputes)
 - 0.4–0.5: insufficient data or missing remark codes -> use needs_review
 - Never exceed 0.8 if similar_claims_context is empty.
+- Never exceed 0.75 for secondary claims (CARC 29 with is_secondary=true).
+- For CARC 50 with no prior auth and no secondary diagnosis: confidence must be 0.65–0.75.
+- For CARC 50 with secondary diagnosis present (ec_Diag2): confidence may reach 0.75–0.8 if diagnosis strongly supports procedure.
+
+## Prohibited Behaviors
+- Do NOT output rule_engine_flags, similar_claims, flags, or any internal key in the final JSON.
+- Do NOT reproduce the similar_claims_context values as if they belong to the current claim.
+- Do NOT include ec_DelayReasonCode in evidence for CARC 50 or CARC 18 denials.
+- Do NOT emit <think> tags or chain-of-thought reasoning. Output the JSON object only.
+- Do NOT output any text before the opening {{ or after the closing }}.
 
 Respond ONLY with the JSON object.

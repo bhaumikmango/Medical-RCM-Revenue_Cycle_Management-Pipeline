@@ -1,0 +1,57 @@
+{
+  "total_processed": 40,
+  "avg_confidence": 0.82,
+  "deterministic_rule_accuracy": 100.0,
+  "classification_report": {
+    "needs_review": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 25.0
+    },
+    "not_recoverable": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 10.0
+    },
+    "recoverable": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 4.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 39.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 39.0
+    }
+  },
+  "confidence_calibration": {
+    "0.0-0.5": {
+      "count": 0,
+      "accuracy": 0.0
+    },
+    "0.5-0.7": {
+      "count": 6,
+      "accuracy": 1.0
+    },
+    "0.7-0.9": {
+      "count": 15,
+      "accuracy": 1.0
+    },
+    "0.9-1.0": {
+      "count": 18,
+      "accuracy": 1.0
+    }
+  },
+  "failures": []
+}

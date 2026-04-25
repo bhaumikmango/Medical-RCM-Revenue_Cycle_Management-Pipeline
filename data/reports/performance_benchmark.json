@@ -1,0 +1,20 @@
+{
+  "hardware": {
+    "os": "Windows 10",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "cpu_cores": 16,
+    "ram_total_gb": 15.65,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 8188"
+  },
+  "latency_avg": {
+    "p1_deterministic": 0.0001,
+    "p1_llm_reasoning": 13.5197,
+    "turbo_store_search": 0.0843
+  },
+  "throughput": {
+    "batch_size": 35,
+    "total_time_sec": 511.8,
+    "claims_per_sec": 0.0684,
+    "sec_per_claim": 14.62
+  }
+}

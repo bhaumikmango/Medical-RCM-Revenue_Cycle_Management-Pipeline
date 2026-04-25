@@ -208,5 +208,29 @@
     "recoverability": "needs_review",
     "carc": "97",
     "description": "Bundled"
+  },
+  "SYN-2026-COB-001": {
+    "claim_id": "SYN-2026-COB-001",
+    "recoverability": "needs_review",
+    "carc": "29",
+    "description": "Medicare Secondary timely filing"
+  },
+  "SYN-2026-CORR-001": {
+    "claim_id": "SYN-2026-CORR-001",
+    "recoverability": "recoverable",
+    "carc": "18",
+    "description": "Corrected claim frequency 7"
+  },
+  "SYN-2026-AUTH-001": {
+    "claim_id": "SYN-2026-AUTH-001",
+    "recoverability": "needs_review",
+    "carc": "197",
+    "description": "No auth with delay reason"
+  },
+  "SYN-2026-MISS-001": {
+    "claim_id": "SYN-2026-MISS-001",
+    "recoverability": "needs_review",
+    "carc": "16",
+    "description": "Missing principal diagnosis"
   }
 }

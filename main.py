@@ -78,7 +78,13 @@ def main():
         results = pipeline.claim_store.get_all_denied_claims_with_analysis()
         # Find the one we just did (last one)
         last_result = results[-1]
-        print(json.dumps(last_result["analysis"], indent=2))
+        # Filter output for terminal display
+        DISPLAY_FIELDS = {
+            "claim_id", "root_cause", "carc_interpretation",
+            "recoverability", "confidence", "evidence", "recommended_action"
+        }
+        display_output = {k: v for k, v in last_result["analysis"].items() if k in DISPLAY_FIELDS}
+        print(json.dumps(display_output, indent=2))
 
     elif args.command == "batch":
         if not os.path.exists(args.input):
