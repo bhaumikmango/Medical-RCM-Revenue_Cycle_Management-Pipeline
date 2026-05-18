@@ -1,4 +1,4 @@
-# Gabeo RCM — AI-Powered Claim Denial Analysis
+# RCM — AI-Powered Claim Denial Analysis
 
 A production-grade pipeline for automated healthcare insurance claim denial analysis. 
 The system combines a deterministic rule engine with locally hosted DeepSeek-R1:8B reasoning to identify denial root causes, assess recoverability, match historical patterns, and surface batch-level recovery opportunities.
@@ -63,7 +63,7 @@ single, well-defined responsibility.
 ### Repository Structure
 
 ```
-gabeo-rcm/
+Medical-RCM-Revenue_Cycle_Management-Pipeline/
 ├── app/                        # FastAPI web dashboard (amber/white UI)
 │   ├── core/config.py          # Application configuration
 │   ├── routers/claims.py       # API routes for claims and statistics
